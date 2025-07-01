@@ -574,6 +574,7 @@
         transform: scale(0.7); /* Başlangıçta daha küçük */
         opacity: 0;
         transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease-out; /* Daha akıcı scale geçişi */
+        position: relative; /* Kapatma butonu için relative konumlandırma */
     }
     .message-box-overlay.show .message-box-content {
         transform: scale(1); /* Normal boyutuna gel */
@@ -599,6 +600,34 @@
         width: 100%;
         align-items: center; /* Küçük ekranlarda ortala */
     }
+
+    /* Kapatma butonu stili */
+    .message-box-close-button {
+        position: absolute;
+        top: 10px; /* Sağ üst köşeye yakın */
+        right: 10px; /* Sağ üst köşeye yakın */
+        background-color: rgba(0, 0, 0, 0.1); /* Hafif şeffaf arka plan */
+        color: #666; /* Gri renk */
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2001; /* Mesaj kutusunun üzerinde olsun */
+    }
+    .message-box-close-button:hover {
+        background-color: #ef4444; /* Kırmızı renk */
+        color: white;
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
 
     @media (min-width: 768px) { /* Orta ekranlardan itibaren satır düzeni */
         .modal-body-content {
@@ -1285,6 +1314,10 @@
   <!-- Mesaj Kutusu HTML Yapısı -->
   <div id="message-box-overlay" class="message-box-overlay">
     <div class="message-box-content">
+      <!-- Kapatma butonu eklendi -->
+      <button id="message-box-close-button" class="message-box-close-button">
+        <i class="fas fa-times"></i>
+      </button>
       <h4 id="message-box-title"></h4>
       <div class="modal-body-content">
         <div id="modal-product-images" class="modal-product-images">
@@ -1572,7 +1605,7 @@
       
       <!-- Müşteri Yorumu 3 -->
       <div class="modern-testimonial-card">
-        <i class="fas fa-quote-right quote-icon"></i>
+        <i class="fas fa fa-quote-right quote-icon"></i>
         <p>"Mutfağımıza yeni fırınlı ocağımızla modern bir dokunuş kattık ve yemek yapmak hiç bu kadar keyifli olmamıştı! Ürünün kalitesi ve sundukları spot fiyat beni gerçekten şaşırttı. İç Anadolu Spot kalitesi ve uygun fiyatı bir arada sunuyor."</p>
         <div class="author-info">
           <img src="https://placehold.co/80x80/90EE90/000000?text=ZA" alt="Zeynep Aksoy Avatar">
@@ -1818,7 +1851,12 @@
     document.getElementById('modal-gallery-overlay').classList.remove('show');
   }
 
-  // Çarpı işaretine tıklama olayını ekle
+  // Mesaj kutusu kapatma butonuna tıklama olayını ekle
+  document.getElementById('message-box-close-button').addEventListener('click', () => {
+      document.getElementById('message-box-overlay').classList.remove('show');
+  });
+
+  // Büyük görsel modalının çarpı işaretine tıklama olayını ekle
   document.getElementById('modal-close-button').addEventListener('click', closeImageModal);
 
 
@@ -2071,60 +2109,6 @@
                 'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop'
-            ]
-          )}
-        </div>`;
-    }
-    else if (category === 'konsol') {
-      content = `
-        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Konsollar</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          ${productPlaceholder(
-            'Modern Beyaz Konsol', 
-            'Minimalist ve çağdaş tasarımıyla öne çıkan bu beyaz konsol, salonunuzda veya yemek odanızda şık bir depolama alanı sunar. Geniş çekmeceleri ve raflarıyla eşyalarınızı düzenli tutar.', 
-            'Modern', 
-            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol1.png?raw=true', 
-            [
-                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol1.png?raw=true',
-                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
-            ]
-          )}
-          ${productPlaceholder(
-            'Beyaz Şık Konsol', 
-            'Temiz çizgileri ve parlak beyaz yüzeyiyle her dekorasyona uyum sağlayan bu konsol, hem estetik hem de işlevsel bir mobilya parçasıdır. Derin çekmeceleriyle ekstra depolama alanı sunar.', 
-            'Şık', 
-            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20beyaz.png?raw=true', 
-            [
-                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20beyaz.png?raw=true',
-                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
-            ]
-          )}
-          ${productPlaceholder(
-            'Antrasit Zarif Konsol', 
-            'Modern yaşam alanları için tasarlanmış antrasit renkli bu konsol, metal ayak detayları ve fonksiyonel çekmeceleriyle dikkat çeker. Şık bir sunum alanı olarak da kullanılabilir.', 
-            'Zarif', 
-            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/antrasit%20konsol.png?raw=true', 
-            [
-                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/antrasit%20konsol.png?raw=true',
-                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
-            ]
-          )}
-          ${productPlaceholder(
-            'Krem Rengi Klasik Konsol', 
-            'Krem rengi ve klasik çizgileriyle evinize asil bir dokunuş katan bu konsol, geniş üst yüzeyiyle dekoratif objelerinizi sergilemeniz için idealdir. Salonunuzda veya koridorunuzda göz alıcı bir parça.', 
-            'Asil', 
-            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20krem.png?raw=true', 
-            [
-                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20krem.png?raw=true',
-                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
             ]
           )}
         </div>`;
