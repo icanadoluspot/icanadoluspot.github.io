@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İç Anadolu Spot | Modern Tasarım Mobilya ve Beyaz Eşya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Genel font ve kaydırma davranışı */
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased; /* Fontları daha pürüzsüz yapar */
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Daha sofistike ve parlak logo efekti - Beyaz rengi ile güncellendi */
+    .logo-effect {
+      font-weight: 900;
+      font-size: 3.8rem;
+      position: relative;
+      background: linear-gradient(135deg, #ffffff, #f0f0f0, #e0e0e0); /* Beyaz tonları */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Hafif beyaz parlaması */
+    }
+    .logo-effect:hover {
+      text-shadow: 0 0 40px #ffffff, 0 0 80px #f0f0f0, 0 0 120px #e0e0e0; /* Güçlü beyaz parlama */
+      transform: scale(1.18);
+    }
+
+    /* Kahraman Bölümü için daha gelişmiş animasyon */
+    @keyframes fadeInSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+    .hero-text-animate {
+      animation: fadeInSlideUp 1.2s ease-out forwards;
+      animation-delay: 0.3s; /* Gecikmeli başlama */
+    }
+
+    /* Kategori İçerik Geçişi */
+    .slide-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out; /* Daha yumuşak hızlanma */
+    }
+    .slide-content.active {
+      max-height: 5000px; /* Daha fazla içerik için artırıldı */
+      opacity: 1;
+    }
+
+    /* Ürün Kartları için zarif animasyonlar */
+    .product-card {
+      transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background-color 0.4s ease-out;
+      border-radius: 16px; /* Daha yuvarlak köşeler */
+      overflow: hidden; /* Resimlerin taşmasını engelle */
+      background-color: #ffffff; /* Beyaz arka plan */
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02); /* Hafifçe yukarı kay ve büyü */
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18); /* Daha belirgin gölge */
+      background-color: #f8faff; /* Hafif arka plan değişimi */
+    }
+
+    .product-card img {
+        transition: transform 0.4s ease-out;
+    }
+    .product-card:hover img {
+        transform: scale(1.05); /* Resim üzerinde hafif zoom */
+    }
+
+    /* Kategori Butonları */
+    .category-button {
+      transition: all 0.3s ease-in-out;
+      border-radius: 9999px; /* Tamamen ovalleştirildi */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Daha belirgin gölge */
+      background: linear-gradient(135deg, #e0e7ff, #c3daff); /* Hafif gradyan */
+      border: 1px solid rgba(199, 210, 254, 0.5); /* Hafif kenarlık */
+      position: relative;
+      overflow: hidden;
+    }
+    .category-button::before { /* Parıltı efekti */
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150%;
+        height: 150%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%) rotate(45deg);
+        transition: all 0.5s ease-out;
+        opacity: 0;
+    }
+    .category-button:hover::before {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .category-button:hover {
+      background: linear-gradient(135deg, #60a5fa, #3b82f6); /* Hover'da daha canlı gradyan */
+      color: white; /* Yazı rengi beyaz */
+      transform: translateY(-5px) scale(1.05); /* Daha belirgin kalkma ve büyüme */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Güçlü gölge */
+      text-shadow: 0 0 8px rgba(255,255,255,0.6); /* Hafif yazı parlaması */
+      border-color: #3b82f6; /* Kenarlık rengi */
+    }
+    .category-button.active-category {
+        background: linear-gradient(135deg, #2563eb, #1e40af); /* Seçili kategori için daha koyu, daha güçlü gradyan */
+        color: white;
+        transform: translateY(-3px) scale(1.03); /* Seçiliyken hafif kalkık kalsın */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Seçiliyken daha güçlü gölge */
+        border-color: #1e40af;
+    }
+    .category-button.active-category span {
+        color: white !important; /* Seçiliyken metin rengini beyaz yap */
+    }
+    .category-button span {
+        transition: color 0.3s ease-in-out;
+        position: relative;
+        z-index: 2; /* Parlama efektinin üzerinde kalması için */
+    }
+
+
+    /* Sosyal Medya İkonları */
+    .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px; /* Daha büyük boyut */
+        height: 50px; /* Daha büyük boyut */
+        border-radius: 50%; /* Yuvarlak şekil */
+        background-color: #ffffff; /* Beyaz arka plan */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Hafif gölge */
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+    }
+    .social-icon img {
+        width: 60%; /* İkonun kutu içindeki boyutu */
+        height: 60%;
+        filter: none; /* Invert filtresini kaldır */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .social-icon:hover {
+        transform: translateY(-8px) scale(1.15); /* Daha belirgin kalkma ve büyüme */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); /* Daha güçlü gölge */
+    }
+
+    .social-icon.whatsapp:hover {
+        background-color: #25d366; /* WhatsApp yeşili */
+    }
+    .social-icon.tiktok:hover {
+        background-color: #000000; /* TikTok siyahı */
+    }
+    .social-icon.instagram:hover {
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); /* Instagram gradyanı */
+    }
+    .social-icon.facebook:hover {
+        background-color: #1877f2; /* Facebook mavisi */
+    }
+
+    .social-icon:hover img {
+        transform: scale(1.1); /* İkonun kendisi de büyüsün */
+        filter: brightness(0) invert(1); /* Hover'da ikon rengini beyaza çevir */
+    }
+
+    /* Genel Bölüm Stilleri */
+    section {
+        margin-bottom: 2.5rem; /* Bölümler arası daha fazla boşluk */
+    }
+
+    /* Detaylı İncele Butonunun Yeni Stilleri (Daha oval ve dinamik efekt) */
+    .btn-primary {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Hafif gradyan */
+        color: white;
+        padding: 0.9rem 2.2rem; /* Daha büyük buton */
+        border-radius: 9999px; /* Tamamen oval şekil */
+        font-weight: 600; /* Biraz daha kalın yazı */
+        transition: all 0.3s ease-in-out; /* Tüm geçişler için */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Daha belirgin başlangıç gölgesi */
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        border: none; /* Kenarlık olmasın */
+    }
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); /* Hover'da daha koyu gradyan */
+        transform: translateY(-4px) scale(1.02); /* Daha belirgin kalkma ve büyüme */
+        box-shadow: 0 12px 25px rgba(0,0,0,0.35); /* Daha güçlü gölge */
+        text-shadow: 0 0 8px rgba(255,255,255,0.7); /* Hafif yazı parlaması */
+    }
+    /* Buton içindeki ikon ve yazı arasındaki boşluk */
+    .btn-primary i {
+        margin-right: 0.75rem; /* İkon ve metin arasına boşluk */
+    }
+
+
+    /* Navbar Linkleri için Yeni Stiller */
+    .nav-link {
+        position: relative;
+        padding: 0.75rem 1rem; /* Daha fazla padding */
+        transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 12px; /* Hafif yuvarlak köşeler */
+        font-weight: 600; /* Daha kalın font */
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Yazıya hafif gölge */
+        color: white; /* Varsayılan beyaz */
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -8px; /* Linklerin daha altında */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #a7f3d0; /* Vurgu rengi */
+        transition: width 0.3s ease;
+        border-radius: 2px;
+    }
+    .nav-link:hover {
+        color: #a7f3d0; /* Hover'da vurgu rengi */
+        transform: translateY(-3px); /* Hafif yukarı kayma */
+        box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Daha belirgin gölge */
+        background-color: rgba(255,255,255,0.1); /* Hafif şeffaf arka plan */
+    }
+    .nav-link:hover::after {
+        width: 100%; /* Tam genişlikte alt çizgi */
+    }
+
+
+    /* Product Slider Specific Styles */
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .slider-wrapper {
+      display: flex;
+      transition: transform 0.8s ease-in-out; /* Smooth transition for slides */
+    }
+    .slider-item {
+      min-width: 100%; /* Each item takes full width */
+      box-sizing: border-box;
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+    .slider-nav button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.6); /* Biraz daha koyu */
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-size: 1.2rem; /* Daha büyük ikon */
+    }
+    .slider-nav button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+      transform: translateY(-50%) scale(1.1); /* Hover'da biraz büyüme */
+    }
+    .slider-nav button.prev {
+      left: 1.5rem; /* Biraz daha içeride */
+    }
+    .slider-nav button.next {
+      right: 1.5rem; /* Biraz daha içeride */
+    }
+
+    /* Newsletter Form */
+    .newsletter-section {
+        background: linear-gradient(135deg, #66a6ff, #3b82f6);
+        color: white;
+        border-radius: 20px; /* Daha yuvarlak bir kutu */
+        margin: 2rem auto;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .newsletter-input {
+        border-radius: 9999px; /* Fully rounded */
+        padding: 0.75rem 1.5rem;
+        border: none;
+        outline: none;
+        width: 100%;
+        max-width: 400px;
+        color: #333;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .newsletter-button {
+        background-color: #a7f3d0; /* Highlight color */
+        color: #2563eb; /* Dark blue text */
+        border-radius: 9999px;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .newsletter-button:hover {
+        background-color: #e0f2fe; /* Lighter hover */
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Live Chat Button (WhatsApp) */
+    .live-chat-button {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: #28a745; /* Yeşil renk */
+      color: white;
+      padding: 1rem 1.2rem;
+      border-radius: 50%;
+      font-size: 1.7rem; /* Biraz daha büyük ikon */
+      box-shadow: 0 6px 15px rgba(0,0,0,0.35); /* Daha belirgin gölge */
+      z-index: 1000;
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1; /* Kare olmasını sağlar */
+    }
+    .live-chat-button:hover {
+      background-color: #218838;
+      transform: scale(1.12) translateY(-2px); /* Daha belirgin büyüme ve hafif yukarı kayma */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    }
+
+    /* Scroll to Top Button */
+    .scroll-to-top-button {
+        position: fixed;
+        bottom: 7.5rem; /* WhatsApp butonunun biraz üstünde */
+        right: 2.2rem; /* WhatsApp butonuyla aynı hizada */
+        background-color: #3b82f6; /* Mavi renk */
+        color: white;
+        padding: 1rem;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+        z-index: 999; /* WhatsApp butonundan biraz daha düşük */
+        cursor: pointer;
+        transition: all 0.3s ease-in-out, opacity 0.4s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0; /* Başlangıçta gizli */
+        visibility: hidden;
+        aspect-ratio: 1/1;
+    }
+    .scroll-to-top-button.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .scroll-to-top-button:hover {
+        background-color: #2563eb;
+        transform: scale(1.12) translateY(-2px); /* Hafif büyüme ve yukarı hareket */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    }
+
+    /* Testimonial Card */
+    .testimonial-card {
+        background-color: #f0f8ff; /* Çok açık mavi */
+        border-left: 6px solid #3b82f6; /* Daha kalın çizgi */
+        border-radius: 12px; /* Daha yuvarlak */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Daha belirgin gölge */
+        padding: 2rem; /* Daha fazla iç boşluk */
+        margin: 1rem; /* Grid içinde boşluk */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+    .testimonial-card p {
+        font-style: italic;
+        color: #4a5568;
+        margin-bottom: 1.2rem;
+        font-size: 1.15rem; /* Biraz daha büyük metin */
+        line-height: 1.6;
+    }
+    .testimonial-card .author {
+        font-weight: 700;
+        color: #2c5282;
+        font-size: 1.25rem; /* Biraz daha büyük yazar adı */
+    }
+    .testimonial-card .rating {
+        color: #ffc107; /* Yıldız rengi */
+        margin-bottom: 0.8rem;
+        font-size: 2.2rem; /* Daha büyük yıldızlar */
+    }
+
+    /* testimonial card updated styles */
+    .modern-testimonial-card {
+      background: linear-gradient(145deg, #ffffff, #f0f8ff);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.4s ease-out;
+      border: 1px solid rgba(220, 220, 220, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .modern-testimonial-card::before { /* Corner accent */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, #3b82f6, #60a5fa);
+      border-bottom-right-radius: 20px;
+      box-shadow: 2px 2px 8px rgba(59, 130, 246, 0.4);
+      transition: all 0.4s ease-out;
+    }
+    .modern-testimonial-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 0 0 20px rgba(59, 130, 246, 0.3);
+      background: linear-gradient(145deg, #f8faff, #e0f2fe);
+    }
+    .modern-testimonial-card:hover::before {
+      width: 60px;
+      height: 60px;
+      transform: rotate(15deg);
+    }
+    .modern-testimonial-card .quote-icon {
+      font-size: 3rem;
+      color: #3b82f6;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+      transition: all 0.3s ease-out;
+    }
+    .modern-testimonial-card:hover .quote-icon {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    .modern-testimonial-card p {
+      font-style: normal; /* Remove italic */
+      color: #334155; /* Darker text for better readability */
+      margin-bottom: 1.5rem;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1; /* Ensure text is above ::before */
+    }
+    .modern-testimonial-card .author-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .modern-testimonial-card .author-info img {
+      width: 80px; /* Larger avatar */
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.75rem;
+      border: 4px solid #a7f3d0; /* Accent border */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-out;
+    }
+    .modern-testimonial-card:hover .author-info img {
+      transform: scale(1.05) rotate(-5deg);
+      border-color: #6ee7b7; /* Darker accent on hover */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    .modern-testimonial-card .author-info .name {
+      font-weight: 800;
+      color: #1e3a8a; /* Dark blue for name */
+      font-size: 1.4rem; /* Larger name font */
+      margin-bottom: 0.25rem;
+    }
+    .modern-testimonial-card .author-info .title {
+      font-size: 0.95rem;
+      color: #64748b; /* Lighter grey for title */
+      font-style: italic;
+    }
+    .modern-testimonial-card .rating {
+        color: #fbbf24; /* Yellow for stars */
+        margin-bottom: 0.8rem;
+        font-size: 1.8rem; /* Slightly smaller stars but still prominent */
+        transition: transform 0.3s ease-out;
+    }
+    .modern-testimonial-card:hover .rating {
+        transform: scale(1.1);
+    }
+
+
+    /* Çalışma Saatleri Stili */
+    .working-hours {
+        background-color: #e2e8f0; /* Hafif gri arka plan */
+        padding: 1.5rem; /* Daha fazla padding */
+        border-radius: 12px; /* Daha yuvarlak */
+        margin-top: 2rem;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,0.08); /* İç gölge */
+    }
+    .working-hours h5 {
+        font-weight: 700;
+        color: #2c5282;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+    .working-hours ul {
+        list-style: none;
+        padding: 0;
+    }
+    .working-hours li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.4rem 0; /* Daha fazla dikey boşluk */
+        border-bottom: 1px dotted #a0aec0; /* Daha belirgin noktalı çizgi */
+    }
+    .working-hours li:last-child {
+        border-bottom: none;
+    }
+    .working-hours .day {
+        font-weight: 600;
+        color: #4a5568;
+    }
+    .working-hours .time {
+        color: #2d3748;
+    }
+
+    /* Mesaj Kutusu Stilleri */
+    .message-box-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000; /* En üstte */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease-out; /* Daha yumuşak fade */
+    }
+    .message-box-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .message-box-content {
+        background-color: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 650px; /* Görseller için genişletildi */
+        transform: scale(0.7); /* Başlangıçta daha küçük */
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease-out; /* Daha akıcı scale geçişi */
+    }
+    .message-box-overlay.show .message-box-content {
+        transform: scale(1); /* Normal boyutuna gel */
+        opacity: 1;
+    }
+    .message-box-content h4 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #2563eb;
+    }
+    .message-box-content p {
+        font-size: 1.2rem; /* Biraz daha büyük ve belirgin */
+        color: #334155; /* Daha koyu okunabilirlik için */
+        margin-bottom: 2.5rem; /* Metin altında daha fazla boşluk */
+        line-height: 1.8; /* Daha iyi okunabilirlik */
+    }
+    /* Modal içerik düzeni (görsel ve metin/butonlar için) */
+    .modal-body-content {
+        display: flex;
+        flex-direction: column; /* Küçük ekranlarda sütun düzeni */
+        gap: 2rem; /* Görsel ve metin/butonlar arası boşluk */
+        width: 100%;
+        align-items: center; /* Küçük ekranlarda ortala */
+    }
+
+    @media (min-width: 768px) { /* Orta ekranlardan itibaren satır düzeni */
+        .modal-body-content {
+            flex-direction: row;
+            text-align: left;
+            align-items: flex-start; /* Yatayda hizalama */
+        }
+        .message-box-content {
+            max-width: 800px; /* Daha geniş modal için ayarlandı */
+            text-align: left; /* Genel metni sola hizala */
+        }
+        .message-box-content p { /* Modal içindeki p etiketini sola hizala */
+          text-align: left;
+        }
+    }
+
+    /* Modal ürün görselleri için stil */
+    .modal-product-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 sütun */
+        gap: 0.75rem; /* Görseller arası boşluk */
+        width: 100%;
+        max-width: 300px; /* Görsel konteyner genişliği */
+        margin: 0 auto; /* Küçük ekranlarda ortala */
+        justify-content: center;
+        position: relative; /* "Tıklayınca büyüt" yazısı için konumlandırma */
+        padding-bottom: 2.5rem; /* Yazı için alt boşluk */
+    }
+    /* Yeni eklenen yazı stili */
+    .modal-product-images .info-text {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.9rem;
+        color: #6b7280;
+        white-space: nowrap;
+        text-align: center;
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .modal-product-images {
+            flex-shrink: 0; /* Küçülmesini engelle */
+            width: 300px; /* Büyük ekranlarda sabit genişlik */
+            margin: 0; /* Otomatik marjı kaldır */
+        }
+    }
+
+    .modal-product-images img {
+        width: 100%;
+        height: 100px; /* Küçük görsel boyutları */
+        object-fit: cover;
+        border-radius: 8px; /* Yuvarlak köşeler */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer; /* Tıklanabilir olduğunu belirtmek için */
+    }
+
+    .modal-product-images img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    /* Modal metin ve butonlar bölümü */
+    .modal-text-and-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Küçük ekranlarda ortala */
+        width: 100%;
+        padding: 0 1rem; /* Metin için biraz dolgu */
+    }
+    @media (min-width: 768px) {
+        .modal-text-and-buttons {
+            align-items: flex-start; /* Büyük ekranlarda sola hizala */
+            text-align: left;
+            padding: 0;
+        }
+    }
+
+    /* Modal içerisindeki butonlar */
+    .message-box-content .message-buttons {
+        display: flex;
+        flex-direction: column; /* Butonları dikey yığınla */
+        justify-content: center;
+        align-items: center; /* Butonları yatayda ortala */
+        gap: 1.5rem; /* Butonlar arası daha fazla boşluk */
+        width: 100%;
+    }
+    .message-box-content .message-buttons a { /* Linkler de buton gibi davransın */
+        background-color: #3b82f6;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 280px;
+    }
+    .message-box-content .message-buttons a:hover {
+        background-color: #2563eb;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    /* WhatsApp butonu özel rengi ve boyutu */
+    .message-box-content .message-buttons .whatsapp-btn {
+        background-color: #28a745; /* Yeşil */
+        padding: 1.2rem 2.5rem; /* Çok daha büyük buton için dolgu */
+        font-size: 1.25rem; /* Daha büyük font boyutu */
+        border-radius: 15px; /* Daha yuvarlak */
+    }
+    .message-box-content .message-buttons .whatsapp-btn:hover {
+        background-color: #218838; /* Koyu yeşil */
+        transform: translateY(-4px); /* Daha belirgin hover efekti */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.35); /* Daha güçlü gölge */
+    }
+
+    /* Kategori başlıkları için modern stil */
+    #category-content h3 {
+        font-size: 2.5rem; /* Daha büyük font */
+        font-weight: 800; /* Ekstra kalın */
+        color: #1e3a8a; /* Daha koyu mavi */
+        margin-bottom: 2.5rem; /* Daha fazla boşluk */
+        text-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Hafif gölge */
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    #category-content h3::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 80px; /* Alt çizgi genişliği */
+        height: 4px; /* Alt çizgi kalınlığı */
+        background: linear-gradient(90deg, #60a5fa, #3b82f6); /* Mavi gradyan alt çizgi */
+        border-radius: 2px;
+    }
+
+    /* Footer'a eklenen logo ve metin stilleri */
+    .footer-logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .footer-logo-text {
+        font-weight: 900;
+        font-size: 2.5rem; /* Footer logosu için biraz küçültülmüş boyut */
+        background: linear-gradient(135deg, #a7f3d0, #e0f2fe, #a7f3d0); /* Açık renk gradyan */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 10px rgba(167, 243, 208, 0.4); /* Hafif parlama */
+        margin-bottom: 0.5rem;
+    }
+    .footer-description {
+        font-size: 1rem;
+        color: #cbd5e1; /* Hafif gri */
+        max-width: 600px;
+        line-height: 1.6;
+    }
+
+    /* İletişim Kartı Stilleri */
+    .contact-card {
+        background: linear-gradient(145deg, #ffffff, #f0f8ff); /* Yumuşak gradyan */
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Daha güçlü gölge */
+        padding: 3rem; /* Daha fazla dolgu */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+    }
+    .contact-card:hover {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: 0 25px 55px rgba(0,0,0,0.25);
+    }
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Ortalamak için */
+        margin-bottom: 1.5rem; /* Daha fazla boşluk */
+        gap: 1rem; /* İkon ve metin arası boşluk */
+        width: 100%; /* Tam genişlik */
+    }
+    .contact-info-item i {
+        font-size: 2.5rem; /* Daha büyük ikonlar */
+        color: #2563eb; /* Canlı mavi */
+        text-shadow: 0 2px 5px rgba(37,99,235,0.3); /* İkonlara hafif gölge */
+    }
+    .contact-info-item p, .contact-info-item a {
+        font-size: 1.15rem; /* Biraz daha büyük metin */
+        color: #334155;
+        font-weight: 500;
+        margin: 0; /* Varsayılan marjları sıfırla */
+    }
+    .contact-info-item a {
+        color: #2563eb; /* Link rengi */
+        transition: color 0.3s ease;
+    }
+    .contact-info-item a:hover {
+        color: #1e40af; /* Hover rengi */
+        text-decoration: underline;
+    }
+
+    /* Çalışma Saatleri (İletişim Bölümü için güncellendi) */
+    .contact-working-hours {
+        background-color: #e0f2fe; /* Çok açık mavi */
+        padding: 1.8rem; /* Daha fazla dolgu */
+        border-radius: 15px;
+        margin-top: 2.5rem;
+        width: 100%;
+        max-width: 400px; /* Sabit genişlik */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 1px solid #93c5fd; /* Hafif kenarlık */
+    }
+    .contact-working-hours h5 {
+        font-weight: 700;
+        color: #1e3a8a; /* Koyu mavi başlık */
+        font-size: 1.5rem; /* Daha büyük başlık */
+        margin-bottom: 1.2rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    .contact-working-hours h5::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #3b82f6; /* Vurgu rengi */
+        border-radius: 2px;
+    }
+    .contact-working-hours ul {
+        list-style: none;
+        padding: 0;
+    }
+    .contact-working-hours li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.6rem 0;
+        font-size: 1.1rem;
+        color: #4a5568;
+        border-bottom: 1px dashed #bfdbfe; /* Daha yumuşak çizgi */
+    }
+    .contact-working-hours li:last-child {
+        border-bottom: none;
+    }
+    .contact-working-hours .day {
+        font-weight: 600;
+        color: #2c5282;
+    }
+    .contact-working-hours .time {
+        font-weight: 500;
+        color: #2d3748;
+    }
+
+    /* Harita Konumu Butonu */
+    .map-button {
+        background: linear-gradient(135deg, #10b981, #059669); /* Yeşil gradyan */
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 1.15rem;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        text-decoration: none; /* Link olduğu için alt çizgiyi kaldır */
+        margin-top: 2.5rem; /* Çalışma saatleri ile arasına boşluk */
+        max-width: 350px;
+        width: 100%;
+        justify-content: center; /* İçeriği ortala */
+    }
+    .map-button:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        text-shadow: 0 0 10px rgba(255,255,255,0.7);
+    }
+    .map-button i {
+        font-size: 1.4rem; /* İkon boyutu */
+    }
+
+    /* Rakamlarla Biz bölümü için yeni stiller */
+    .numbers-card {
+        background: linear-gradient(145deg, #e0f2fe, #dbeafe); /* Açık mavi gradyan */
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Güçlü dış gölge */
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-out;
+        border: 1px solid rgba(147, 197, 253, 0.4); /* Hafif, ince kenarlık */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .numbers-card::before { /* Parıltı efekti için */
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 70%);
+        transition: opacity 0.5s ease-out;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .numbers-card:hover::before {
+        opacity: 1;
+    }
+
+    .numbers-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 25px 60px rgba(0,0,0,0.25), 0 0 30px rgba(59, 130, 246, 0.4); /* Mavi parlayan gölge */
+        background: linear-gradient(145deg, #dbeafe, #bfdbfe); /* Hafif koyu hover gradyanı */
+    }
+
+    .numbers-card .icon {
+        font-size: 4.5rem; /* Daha büyük ikonlar */
+        margin-bottom: 1.5rem;
+        color: #2563eb; /* Canlı mavi ikon rengi */
+        text-shadow: 0 3px 8px rgba(37,99,235,0.4); /* İkonlara belirgin gölge */
+        transition: color 0.4s ease-out, text-shadow 0.4s ease-out;
+    }
+
+    .numbers-card:hover .icon {
+        color: #1e40af; /* Hover'da ikon rengi koyulaşsın */
+        text-shadow: 0 5px 12px rgba(30,64,175,0.6);
+    }
+
+    .numbers-card .number {
+        font-size: 4rem; /* Sayı font boyutu */
+        font-weight: 900; /* Ekstra kalın */
+        color: #1e3a8a; /* Koyu mavi sayı rengi */
+        margin-bottom: 0.75rem;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: relative;
+        background: linear-gradient(45deg, #1e3a8a, #3b82f6); /* Sayıya gradyan */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all 0.4s ease-out;
+    }
+
+    .numbers-card:hover .number {
+        transform: scale(1.05); /* Hover'da sayı hafif büyüsün */
+        background: linear-gradient(45deg, #1e40af, #2563eb); /* Sayıya koyu gradyan */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .numbers-card .description {
+        font-size: 1.4rem; /* Açıklama font boyutu */
+        font-weight: 600;
+        color: #4a5568; /* Orta gri açıklama rengi */
+        line-height: 1.4;
+        transition: color 0.4s ease-out;
+    }
+
+    .numbers-card:hover .description {
+        color: #2d3748; /* Hover'da açıklama rengi koyulaşsın */
+    }
+
+    /* Yeni Biz Kimiz bölümü için özel stil */
+    .about-us-section {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f0f4f8 0%, #e8edf2 100%); /* Hafif, sofistike arka plan */
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1); /* Derin ve yumuşak gölge */
+        padding: 4rem 2rem; /* Daha fazla iç boşluk */
+        margin: 2rem auto; /* Sayfada ortalamak için */
+        max-width: 1000px; /* Maksimum genişlik */
+        text-align: center;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInSlideUp 1.2s ease-out forwards; /* Genel animasyon */
+        animation-delay: 0.5s;
+    }
+
+    .about-us-section::before { /* Üst sol köşeden gelen parlama efekti */
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%); /* Mavi parlama */
+        border-radius: 50%;
+        z-index: 0;
+        animation: pulseEffect 4s infinite ease-in-out;
+    }
+
+    .about-us-section::after { /* Sağ alt köşeden gelen parlama efekti */
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(167, 243, 208, 0.2), transparent 70%); /* Yeşilimsi parlama */
+        border-radius: 50%;
+        z-index: 0;
+        animation: pulseEffect 4s infinite ease-in-out reverse;
+    }
+
+    @keyframes pulseEffect {
+        0% { transform: scale(0.8); opacity: 0.2; }
+        50% { transform: scale(1.1); opacity: 0.4; }
+        100% { transform: scale(0.8); opacity: 0.2; }
+    }
+
+    .about-us-section h3 {
+        font-size: 3.5rem; /* Daha büyük başlık */
+        font-weight: 900; /* Ekstra kalın */
+        color: #1e3a8a; /* Koyu mavi */
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Başlığa daha belirgin gölge */
+        z-index: 1; /* İçeriğin parlamaların üzerinde kalmasını sağlar */
+    }
+
+    .about-us-section h3::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 100px; /* Alt çizgi genişliği */
+        height: 5px; /* Alt çizgi kalınlığı */
+        background: linear-gradient(90deg, #3b82f6, #60a5fa); /* Mavi gradyan */
+        border-radius: 3px;
+    }
+
+    .about-us-section p {
+        font-size: 1.5rem; /* Daha büyük metin */
+        line-height: 1.8;
+        color: #4a5568; /* Koyu gri okunabilir metin */
+        max-width: 800px;
+        margin: 0 auto;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); /* Metne hafif gölge */
+        position: relative;
+        z-index: 1;
+    }
+    .about-us-section p strong {
+        color: #2563eb; /* Vurgulu kelimeler için canlı mavi */
+        font-weight: 700;
+    }
+
+    /* Why Choose Us Section Styles */
+    .why-choose-us-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%); /* Soft, light gradient background */
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Elegant shadow */
+        padding: 4rem 2rem;
+        margin: 2rem auto;
+        max-width: 1200px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .why-choose-us-section::before,
+    .why-choose-us-section::after {
+        content: '';
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(167, 243, 208, 0.15), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .why-choose-us-section::before {
+        top: -30px;
+        left: -30px;
+        animation: floatEffect 3s infinite ease-in-out;
+    }
+
+    .why-choose-us-section::after {
+        bottom: -30px;
+        right: -30px;
+        animation: floatEffect 3s infinite ease-in-out reverse;
+    }
+
+    @keyframes floatEffect {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+
+
+    .why-choose-us-section h3 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #1e3a8a;
+        margin-bottom: 3.5rem;
+        position: relative;
+        padding-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+        z-index: 1;
+    }
+
+    .why-choose-us-section h3::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 120px;
+        height: 5px;
+        background: linear-gradient(90deg, #60a5fa, #3b82f6);
+        border-radius: 3px;
+    }
+
+    .why-choose-us-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+        .why-choose-us-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .why-choose-us-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .why-card {
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 2.5rem;
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease-out;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border: 1px solid rgba(220, 220, 220, 0.5);
+    }
+
+    .why-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        background-color: #f0f8ff; /* Light blue tint on hover */
+    }
+
+    .why-card .icon {
+        font-size: 3.5rem;
+        color: #2563eb; /* Vibrant blue */
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 8px rgba(37,99,235,0.3);
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .why-card:hover .icon {
+        color: #1e40af; /* Darker blue on hover */
+        transform: rotateY(15deg) scale(1.1);
+    }
+
+    .why-card h4 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #2d3748;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+
+    .why-card p {
+        font-size: 1.1rem;
+        color: #4a5568;
+        line-height: 1.6;
+    }
+
+
+    /* Responsive ayarlar */
+    @media (max-width: 768px) {
+        .about-us-section, .why-choose-us-section {
+            padding: 3rem 1.5rem;
+        }
+        .about-us-section h3, .why-choose-us-section h3 {
+            font-size: 2.8rem;
+        }
+        .about-us-section p, .why-choose-us-section p {
+            font-size: 1.2rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .about-us-section h3, .why-choose-us-section h3 {
+            font-size: 2.2rem;
+        }
+        .about-us-section p, .why-choose-us-section p {
+            font-size: 1rem;
+        }
+    }
+
+    /* Büyük görsel modalı stilleri */
+    .modal-gallery-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85); /* Daha koyu arka plan */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000; /* En üstte */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-out;
+    }
+    .modal-gallery-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .modal-gallery-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-gallery-content img { /* detaylı incele resim boyutu */
+        max-width: 60%;
+        max-height: 60%;
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        object-fit: contain; /* Görüntünün oranını koruyarak sığdır */
+    }
+    .modal-close-button {
+        position: absolute;
+        top: -20px; /* Görselin biraz dışına */
+        right: -20px; /* Görselin biraz dışına */
+        background-color: rgba(255, 255, 255, 0.3); /* Yarı şeffaf beyaz */
+        color: white;
+        border: 2px solid white;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    .modal-close-button:hover {
+        background-color: white;
+        color: #3b82f6;
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <!-- Mesaj Kutusu HTML Yapısı -->
+  <div id="message-box-overlay" class="message-box-overlay">
+    <div class="message-box-content">
+      <h4 id="message-box-title"></h4>
+      <div class="modal-body-content">
+        <div id="modal-product-images" class="modal-product-images">
+          <!-- Ürün görselleri buraya JavaScript ile eklenecek -->
+          <!-- Yeni eklenen bilgi metni -->
+          <span class="info-text">Detaylı Görselleri Büyütmek İçin Tıklayın!</span>
+        </div>
+        <div class="modal-text-and-buttons">
+          <p id="message-box-text"></p>
+          <div id="message-buttons" class="message-buttons">
+            <!-- Butonlar JavaScript tarafından eklenecek -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Büyük görsel göstermek için yeni modal yapısı -->
+  <div id="modal-gallery-overlay" class="modal-gallery-overlay">
+    <div class="modal-gallery-content">
+      <img id="full-image" src="" alt="Full Image">
+      <button id="modal-close-button" class="modal-close-button">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <header class="bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 shadow-2xl relative z-10">
+    <div class="max-w-7xl mx-auto px-4 py-7 flex flex-col md:flex-row justify-between items-center">
+      <h1 class="logo-effect mb-4 md:mb-0">İç Anadolu Spot</h1>
+      <nav class="flex flex-wrap justify-center space-x-4 md:space-x-8">
+        <a href="#hakkimizda" class="nav-link">Hakkımızda</a>
+        <a href="#why-us" class="nav-link">Neden Biz?</a> <!-- Yeni link -->
+        <a href="#numbers" class="nav-link">Rakamlarla Biz</a>
+        <a href="#urunler" class="nav-link">Ürünler</a>
+        <a href="#featured-products" class="nav-link">Öne Çıkanlar</a>
+        <a href="#testimonials" class="nav-link">Yorumlar</a>
+        <a href="#iletisim" class="nav-link">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="bg-cover bg-center h-[500px] relative flex items-center justify-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1571575402484-900a897cc961?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+    <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+      <h2 class="text-white text-4xl sm:text-5xl lg:text-6xl font-extrabold hero-text-animate text-center drop-shadow-2xl px-4">Yaşam Alanlarınıza Yeni Bir Soluk</h2>
+    </div>
+  </section>
+
+  <!-- Yeni "Rüya Evinize Bir Adım Daha Yaklaşın!" bölümü -->
+  <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white text-center shadow-lg">
+    <div class="max-w-4xl mx-auto px-6">
+      <h3 class="text-4xl sm:text-5xl font-extrabold mb-6 drop-shadow-md">Rüya Evinize Bir Adım Daha Yaklaşın!</h3>
+      <p class="text-lg sm:text-xl mb-10 leading-relaxed opacity-90">
+        Geniş ürün yelpazemiz ve cazip fiyatlarımızla evinizi baştan yaratın.
+        Şimdi koleksiyonumuzu inceleyin ve size özel fırsatları kaçırmayın!
+      </p>
+      <button id="discoverProductsBtn" class="btn-primary inline-flex items-center space-x-3 text-lg px-8 py-4 rounded-full shadow-xl">
+        <i class="fas fa-arrow-right"></i>
+        <span>Ürünleri Keşfet</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Güncellenen "Biz Kimiz?" Bölümü -->
+  <section id="hakkimizda" class="about-us-section">
+    <h3>Biz Kimiz?</h3>
+    <p>
+      <strong class="font-extrabold">25 yılı aşkın süredir</strong>, İç Anadolu Spot olarak evlerinize ve ofislerinize <strong class="font-extrabold">kaliteyi, estetiği ve fonksiyonelliği</strong> bir arada sunuyoruz. Geniş ürün yelpazemizle, her zevke ve bütçeye uygun modern ve şık mobilya ile beyaz eşya çözümleri sunarken, <strong class="font-extrabold">müşteri memnuniyetini en üst düzeyde tutmayı</strong> her zaman önceliğimiz olarak benimsiyoruz. Her bir ürünümüzde <strong class="font-extrabold">titiz işçiliği ve dayanıklılığı</strong> garanti ediyoruz.
+    </p>
+  </section>
+
+  <!-- Yeni "Neden İç Anadolu Spot?" Bölümü -->
+  <section id="why-us" class="why-choose-us-section">
+    <h3>Neden İç Anadolu Spot?</h3>
+    <div class="why-choose-us-grid">
+      <!-- Kalite Odaklı Yaklaşım -->
+      <div class="why-card">
+        <i class="fas fa-gem icon"></i>
+        <h4>Kalite Odaklı Yaklaşım</h4>
+        <p>Her bir ürünümüzü özenle seçiyor, uzun ömürlü ve dayanıklı mobilya ve beyaz eşyalar sunuyoruz.</p>
+      </div>
+      <!-- En Uygun Fiyatlar -->
+      <div class="why-card">
+        <i class="fas fa-tag icon"></i>
+        <h4>En Uygun Fiyatlar</h4>
+        <p>Kaliteli ürünleri, bütçenizi zorlamayacak spot fiyatlarla sizlere ulaştırarak avantaj sağlıyoruz.</p>
+      </div>
+      <!-- Hızlı ve Güvenli Teslimat -->
+      <div class="why-card">
+        <i class="fas fa-truck-fast icon"></i>
+        <h4>Hızlı ve Güvenli Teslimat</h4>
+        <p>Satın aldığınız ürünleri en kısa sürede, güvenli bir şekilde kapınıza kadar ulaştırıyoruz.</p>
+      </div>
+      <!-- Müşteri Memnuniyeti -->
+      <div class="why-card">
+        <i class="fas fa-hands-helping icon"></i>
+        <h4>Müşteri Memnuniyeti</h4>
+        <p>Alışverişinizin her aşamasında yanınızdayız. Profesyonel ekibimizle her zaman destek sağlıyoruz.</p>
+      </div>
+      <!-- Geniş Ürün Yelpazesi -->
+      <div class="why-card">
+        <i class="fas fa-couch icon"></i>
+        <h4>Geniş Ürün Yelpazesi</h4>
+        <p>Her zevke ve ihtiyaca uygun, modern ve fonksiyonel yüzlerce ürün seçeneği sunuyoruz.</p>
+      </div>
+      <!-- Çevre Dostu Yaklaşım -->
+      <div class="why-card">
+        <i class="fas fa-leaf icon"></i>
+        <h4>Çevre Dostu Yaklaşım</h4>
+        <p>Sürdürülebilirlik ilkelerimizle, çevreye duyarlı ve uzun ömürlü ürünler sunarak geleceğe katkıda bulunuyoruz.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rakamlarla Biz Bölümü -->
+  <section id="numbers" class="py-20 bg-gradient-to-br from-blue-900 to-blue-700 text-white text-center shadow-inner">
+      <div class="max-w-7xl mx-auto px-6">
+          <h3 class="text-4xl sm:text-5xl font-extrabold mb-12 text-white drop-shadow-lg">Rakamlarla Biz</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+              <!-- Yıllık Deneyim -->
+              <div class="numbers-card">
+                  <i class="fas fa-calendar-alt icon"></i>
+                  <p class="number">25+</p>
+                  <span class="description">Yıllık Deneyim</span>
+              </div>
+              <!-- Mutlu Müşteri -->
+              <div class="numbers-card">
+                  <i class="fas fa-smile icon"></i>
+                  <p class="number">1500+</p>
+                  <span class="description">Mutlu Müşteri</span>
+              </div>
+              <!-- Satılan Ürün -->
+              <div class="numbers-card">
+                  <i class="fas fa-box-open icon"></i>
+                  <p class="number">5000+</p>
+                  <span class="description">Satılan Ürün</span>
+              </div>
+              <!-- Müşteri Memnuniyeti -->
+              <div class="numbers-card">
+                  <i class="fas fa-heart icon"></i>
+                  <p class="number">100%</p>
+                  <span class="description">Müşteri Memnuniyeti</span>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="urunler" class="py-20 bg-gray-100">
+    <h3 class="text-4xl sm:text-5xl font-bold mb-12 text-center text-blue-800">Ürün Koleksiyonumuz</h3>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-8 gap-4 sm:gap-2 max-w-6xl mx-auto mb-12 px-4">
+      <div id="btn-koltuk" onclick="toggleCategory('koltuk', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Koltuk Takımı</span>
+      </div>
+      <div id="btn-gardolap" onclick="toggleCategory('gardolap', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Gardırop</span>
+      </div>
+      <div id="btn-portmanto" onclick="toggleCategory('portmanto', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Portmanto</span>
+      </div>
+      <div id="btn-konsol" onclick="toggleCategory('konsol', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Konsol</span>
+      </div>
+      <div id="btn-sifonyer" onclick="toggleCategory('sifonyer', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Şifonyer</span>
+      </div>
+      <div id="btn-akillisehpa" onclick="toggleCategory('akillisehpa', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Akıllı Sehpa</span>
+      </div>
+      <div id="btn-ayakkabilik" onclick="toggleCategory('ayakkabilik', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Ayakkabılık</span>
+      </div>
+      <div id="btn-beyazesya" onclick="toggleCategory('beyazesya', this)" class="cursor-pointer bg-blue-100 text-center py-4 sm:py-6 shadow-md transition category-button">
+        <span class="font-bold text-blue-700 text-sm lg:text-lg">Beyaz Eşya</span>
+      </div>
+    </div>
+
+    <div id="category-content" class="slide-content max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
+      <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 text-center">Lütfen bir kategori seçin...</h3>
+      <p class="text-center text-gray-600 text-base sm:text-lg">Yukarıdaki ürün kategorilerimizden birine tıklayarak çeşitli mobilya ve beyaz eşya çözümlerimizi keşfedin.</p>
+    </div>
+  </section>
+
+  <section id="featured-products" class="py-20 bg-white">
+    <h3 class="text-4xl sm:text-5xl font-bold mb-12 text-center text-blue-800">Öne Çıkan Ürünlerimiz</h3>
+    <div class="max-w-8xl mx-auto px-6">
+      <div class="slider-container relative w-full overflow-hidden">
+        <div class="slider-wrapper flex" style="transform: translateX(0px);">
+          <div class="slider-item p-4">
+            <div class="bg-white rounded-lg shadow-xl p-6 product-card flex flex-col md:flex-row items-center gap-6">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Koltuk Takımı" class="rounded-md w-full md:w-1/2 h-64 md:h-80 object-cover">
+              <div class="md:w-1/2">
+                <h4 class="font-bold text-2xl sm:text-3xl text-gray-900 mb-3">Modern Koltuk Takımı</h4>
+                <p class="text-base sm:text-lg text-gray-700 mb-4">Küçük alanlar için ideal, şık ve fonksiyonel mini köşe takımı. Rahat oturumu ve modern çizgileriyle evinize ferahlık katın.</p>
+                <span class="inline-block bg-green-100 text-green-700 text-sm font-bold px-4 py-2 rounded-full mb-4">Yeni!</span>
+                <button onclick="showProductDetails('Modern Koltuk Takımı', [
+                  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop',
+                  'https://plus.unsplash.com/photos/new/unsplash/assets/hero.jpg?q=80&w=1780&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1593026042450-48222b9b77d6?q=80&w=2070&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1596956277969-95a20d436c64?q=80&w=2070&auto=format&fit=crop'
+                ])" class="btn-primary flex items-center justify-center">
+                    <i class="fas fa-eye"></i>
+                    <span>Detaylı İncele</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="slider-item p-4">
+            <div class="bg-white rounded-lg shadow-xl p-6 product-card flex flex-col md:flex-row-reverse items-center gap-6">
+              <img src="https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true" alt="Akıllı Buzdolabı" class="rounded-md w-full md:w-1/2 h-64 md:h-80 object-cover">
+              <div class="md:w-1/2">
+                <h4 class="font-bold text-2xl sm:text-3xl text-gray-900 mb-3">Yüksek Performanslı Akıllı Buzdolabı</h4>
+                <p class="text-base sm:text-lg text-gray-700 mb-4">Enerji verimliliği ve akıllı özellikleriyle mutfağınıza teknoloji ve şıklık katın. Geniş iç hacim ve özel saklama bölmeleri.</p>
+                <span class="inline-block bg-blue-100 text-blue-700 text-sm font-bold px-4 py-2 rounded-full mb-4">Yeni Ürün</span>
+                <button onclick="showProductDetails('Yüksek Performanslı Akıllı Buzdolabı', [
+                  'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true',
+                  'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop'
+                ])" class="btn-primary flex items-center justify-center">
+                    <i class="fas fa-eye"></i>
+                    <span>Detaylı İncele</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="slider-item p-4">
+            <div class="bg-white rounded-lg shadow-xl p-6 product-card flex flex-col md:flex-row items-center gap-6">
+              <img src="https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true" alt="Minimalist Gardırop" class="rounded-md w-full md:w-1/2 h-64 md:h-80 object-cover">
+              <div class="md:w-1/2">
+                <h4 class="font-bold text-2xl sm:text-3xl text-gray-900 mb-3">Minimalist Gardırop</h4>
+                <p class="text-base sm:text-lg text-gray-700 mb-4">Minimalist tasarımıyla yatak odanıza ferahlık katın. Akıllı depolama çözümleri.</p>
+                <span class="inline-block bg-purple-100 text-purple-700 text-sm font-bold px-4 py-2 rounded-full mb-4">Tavsiye Edilen</span>
+                <button onclick="showProductDetails('Minimalist Gardırop', [
+                  'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true',
+                  'https://images.unsplash.com/photo-1542898950-c8d76985223c?q=80&w=2070&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+                ])" class="btn-primary flex items-center justify-center">
+                    <i class="fas fa-eye"></i>
+                    <span>Detaylı İncele</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-nav">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="py-20 bg-gray-100">
+    <h3 class="text-4xl sm:text-5xl font-bold mb-12 text-center text-blue-800">Müşterilerimiz Ne Diyor?</h3>
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Müşteri Yorumu 1 -->
+      <div class="modern-testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p>"İç Anadolu Spot'tan aldığımız yeni buzdolabı beklentilerimizi aştı! Hem modern görünümüyle mutfağımıza şıklık kattı hem de enerji verimliliğiyle bütçemizi düşündü. Geniş beyaz eşya yelpazeleri gerçekten etkileyiciydi. Herkese tavsiye ederim!"</p>
+        <div class="author-info">
+          <img src="https://placehold.co/80x80/FFD700/000000?text=EK" alt="Elif Kara Avatar">
+          <span class="name">Elif Kara</span>
+          <span class="title">Ev Hanımı, İstanbul</span>
+        </div>
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+      </div>
+      
+      <!-- Müşteri Yorumu 2 -->
+      <div class="modern-testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p>"Yeni gardırop arayışım İç Anadolu Spot'un zengin seçenekleriyle sona erdi. Tam hayal ettiğim gibi, hem çok şık hem de inanılmaz kullanışlı bir model buldum. Üstelik teslimat hızı ve kurulum kolaylığı da cabasıydı. Harika bir deneyim!"</p>
+        <div class="author-info">
+          <img src="https://placehold.co/80x80/ADD8E6/000000?text=CY" alt="Can Yılmaz Avatar">
+          <span class="name">Can Yılmaz</span>
+          <span class="title">Tasarımcı, Ankara</span>
+        </div>
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+      </div>
+      
+      <!-- Müşteri Yorumu 3 -->
+      <div class="modern-testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p>"Mutfağımıza yeni fırınlı ocağımızla modern bir dokunuş kattık ve yemek yapmak hiç bu kadar keyifli olmamıştı! Ürünün kalitesi ve sundukları spot fiyat beni gerçekten şaşırttı. İç Anadolu Spot kalitesi ve uygun fiyatı bir arada sunuyor."</p>
+        <div class="author-info">
+          <img src="https://placehold.co/80x80/90EE90/000000?text=ZA" alt="Zeynep Aksoy Avatar">
+          <span class="name">Zeynep Aksoy</span>
+          <span class="title">Şef, Bursa</span>
+        </div>
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+      </div>
+
+      <!-- Müşteri Yorumu 4 -->
+      <div class="modern-testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p>"Salonum için uzun süredir modern bir konsol arıyordum ve İç Anadolu Spot'taki çeşitlilik beni büyüledi. Tam aradığım tarzı buldum ve misafirlerim bayılıyor! Estetik ve fonksiyonelliği bir araya getiren harika bir seçim oldu."</p>
+        <div class="author-info">
+          <img src="https://placehold.co/80x80/ADD8E6/000000?text=ED" alt="Emre Demir Avatar">
+          <span class="name">Emre Demir</span>
+          <span class="title">İç Mimar, İzmir</span>
+        </div>
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+        </div>
+      </div>
+
+      <!-- Müşteri Yorumu 5 -->
+      <div class="modern-testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p>"Aldığımız koltuk takımı hem inanılmaz rahat hem de evimizin genel atmosferine mükemmel bir şekilde uyum sağladı. Kaliteli kumaşı ve sağlam iskeletiyle uzun yıllar keyifle kullanacağımızdan eminiz. İç Anadolu Spot'un kalitesi tartışılmaz!"</p>
+        <div class="author-info">
+          <img src="https://placehold.co/80x80/E0BBE4/000000?text=AK" alt="Aylin Kaya Avatar">
+          <span class="name">Aylin Kaya</span>
+          <span class="title">Eğitimci, Antalya</span>
+        </div>
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+      </div>
+
+      <!-- Müşteri Yorumu 6 -->
+      <div class="modern-testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p>"Yeni evimiz için şık ve uygun fiyatlı bir köşe takımı arayışındaydık ve İç Anadolu Spot'ta tam da istediğimiz gibi bir seçenek bulduk. Hem bütçemize uygun hem de estetik açıdan çok tatmin edici. Müşteri hizmetlerinden de çok memnunuz!"</p>
+        <div class="author-info">
+          <img src="https://placehold.co/80x80/C7F0D3/000000?text=MÇ" alt="Murat Çelik Avatar">
+          <span class="name">Murat Çelik</span>
+          <span class="title">Mühendis, Eskişehir</span>
+        </div>
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim" class="py-20 max-w-7xl mx-auto px-6 bg-gray-100 shadow-xl rounded-2xl my-12 flex justify-center items-center">
+    <div class="contact-card w-full lg:w-3/4 xl:w-2/3">
+        <h3 class="text-4xl sm:text-5xl font-bold mb-10 text-center text-blue-800">Bize Ulaşın</h3>
+
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-y-0 md:gap-x-12">
+            <!-- İletişim Bilgileri -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p><strong>Adres:</strong> Aşağı Dudullu Mahallesi, Yukarı Dudullu, Alemdağ Cd 511/A, 34000 Ümraniye/İstanbul</p>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p><strong>Telefon:</strong> <a href="tel:+905510448834" class="hover:text-blue-800">0 (551) 044 88 34</a></p>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p><strong>E-posta:</strong> <a href="mailto:icanadoluspot@gmail.com" class="hover:text-blue-800">icanadoluspot@gmail.com</a></p>
+                </div>
+            </div>
+
+            <!-- Çalışma Saatleri ve Harita -->
+            <div class="flex flex-col items-center md:items-end w-full">
+                <div class="contact-working-hours w-full">
+                    <h5>Çalışma Saatlerimiz:</h5>
+                    <ul>
+                        <li><span class="day">Hafta İçi:</span> <span class="time">09:00 - 21:00</span></li>
+                        <li><span class="day">Pazar:</span> <span class="time">11:00 - 19:30</span></li>
+                    </ul>
+                </div>
+                <a href="https://maps.google.com/maps?q=41.0174793%2C29.166487&z=17&hl=tr" target="_blank" class="map-button">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Haritada Konumu Gör</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <footer class="bg-gray-900 text-white text-center py-8 relative">
+    <div class="footer-logo-container">
+        <h1 class="footer-logo-text">İç Anadolu Spot</h1>
+        <p class="footer-description px-4">İkinci el ve Sıfır mobilya, beyaz eşyada kalite, uygun fiyat ve güvenilir hizmet. Evinizi güzelleştirmek için buradayız.</p>
+    </div>
+    <p class="text-sm">© 2025 İç Anadolu Spot. Tüm hakları saklıdır.</p>
+    <div class="flex justify-center space-x-6 mt-4">
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Gizlilik Politikası</a>
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Kullanım Koşulları</a>
+    </div>
+    <div class="fixed bottom-6 left-6 flex space-x-5 z-50"> <!-- z-index ekledim -->
+      <a href="https://wa.me/905510448834" target="_blank" class="social-icon whatsapp">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+      </a>
+      <a href="https://www.tiktok.com/@icanadoluspot" target="_blank" class="social-icon tiktok">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok">
+      </a>
+      <a href="https://www.instagram.com/icanadoluspot" target="_blank" class="social-icon instagram">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61576655510398" target="_blank" class="social-icon facebook">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+      </a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp iletişim butonu -->
+  <a href="https://wa.me/905510448834" target="_blank" class="live-chat-button">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Sayfanın başına git butonu -->
+  <button id="scrollToTopBtn" class="scroll-to-top-button">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+
+<script>
+  let activeCategoryButton = null;
+  let subscribedEmails = []; // Abonelik e-postalarını tarayıcı oturumunda tutar
+
+  // Mesaj kutusu göster/gizle fonksiyonu
+  function showMessageBox(title, message, isError = false, buttons = [], imageUrls = []) {
+      const overlay = document.getElementById('message-box-overlay');
+      const titleEl = document.getElementById('message-box-title');
+      const textEl = document.getElementById('message-box-text');
+      const messageButtonsContainer = document.getElementById('message-buttons');
+      const modalProductImagesContainer = document.getElementById('modal-product-images'); // Yeni görsel konteyneri
+
+      messageButtonsContainer.innerHTML = ''; // Mevcut butonları temizle
+      modalProductImagesContainer.innerHTML = ''; // Mevcut görselleri temizle
+
+      titleEl.textContent = title;
+      textEl.textContent = message;
+
+      titleEl.style.color = isError ? '#dc2626' : '#2563eb';
+
+      // Görselleri ekle (varsa)
+      if (imageUrls && imageUrls.length > 0) {
+          imageUrls.forEach(url => {
+              const img = document.createElement('img');
+              img.src = url;
+              img.alt = title; // Ürün başlığını alt metin olarak kullan
+              img.classList.add('product-thumbnail'); // Yeni stil sınıfı ekle
+              img.onclick = () => openImageModal(url); // Görsele tıklayınca büyük modalı aç
+              img.onerror = function() { this.src = 'https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi'; }; // Hata durumunda yer tutucu görsel
+              modalProductImagesContainer.appendChild(img);
+          });
+          // Görsel yüklendikten sonra bilgi metnini ekle
+          const infoText = document.createElement('span');
+          infoText.classList.add('info-text');
+          infoText.textContent = 'Detaylı Görselleri Büyütmek İçin Tıklayın!';
+          modalProductImagesContainer.appendChild(infoText);
+      }
+
+      buttons.forEach(buttonConfig => {
+          const btnElement = document.createElement(buttonConfig.tag || 'button');
+          if (buttonConfig.iconClass) {
+              btnElement.innerHTML = `<i class="${buttonConfig.iconClass}"></i> ${buttonConfig.text}`;
+          } else {
+              btnElement.textContent = buttonConfig.text;
+          }
+
+          if (buttonConfig.id) btnElement.id = buttonConfig.id;
+          btnElement.className = buttonConfig.className || '';
+          if (buttonConfig.href) btnElement.href = buttonConfig.href;
+          if (buttonConfig.target) btnElement.target = buttonConfig.target;
+
+          btnElement.onclick = (e) => {
+              if (buttonConfig.tag === 'a') {
+                  e.stopPropagation();
+              }
+              overlay.classList.remove('show');
+              if (buttonConfig.onClick) buttonConfig.onClick();
+          };
+          messageButtonsContainer.appendChild(btnElement);
+      });
+
+      overlay.classList.add('show');
+      // Dışarı tıklayınca da kapanmasını sağla
+      const overlayClickHandler = (e) => {
+          if (e.target === overlay) {
+              overlay.classList.remove('show');
+              overlay.removeEventListener('click', overlayClickHandler);
+          }
+      };
+      overlay.addEventListener('click', overlayClickHandler);
+  }
+
+  // Ürün detaylarını gösteren fonksiyon (WhatsApp butonu ve görseller eklendi)
+  function showProductDetails(productName, productImages) {
+      const whatsappBtnConfig = {
+          tag: 'a',
+          text: 'WhatsApp ile Bilgi Alın',
+          href: `https://wa.me/905510448834?text=${encodeURIComponent(`${productName} ürünü hakkında detaylı bilgi almak istiyorum.`)}`,
+          target: '_blank',
+          className: 'whatsapp-btn',
+          iconClass: 'fab fa-whatsapp'
+      };
+
+      showMessageBox(
+          productName, // Başlık artık ürün adı
+          'Daha fazla bilgi almak için lütfen WhatsApp üzerinden bizimle iletişime geçin.',
+          false,
+          [whatsappBtnConfig],
+          productImages // Görselleri buraya gönder
+      );
+  }
+
+  // Büyük görsel modalını açan fonksiyon
+  function openImageModal(imageUrl) {
+    const galleryOverlay = document.getElementById('modal-gallery-overlay');
+    const fullImage = document.getElementById('full-image');
+    fullImage.src = imageUrl;
+    galleryOverlay.classList.add('show');
+
+    // Dışarı tıklayınca kapanma
+    const galleryOverlayClickHandler = (e) => {
+      if (e.target === galleryOverlay) {
+        closeImageModal();
+        galleryOverlay.removeEventListener('click', galleryOverlayClickHandler);
+      }
+    };
+    galleryOverlay.addEventListener('click', galleryOverlayClickHandler);
+  }
+
+  // Büyük görsel modalını kapatan fonksiyon
+  function closeImageModal() {
+    document.getElementById('modal-gallery-overlay').classList.remove('show');
+  }
+
+  // Çarpı işaretine tıklama olayını ekle
+  document.getElementById('modal-close-button').addEventListener('click', closeImageModal);
+
+
+  // Kategori butonları arasında geçiş yapma fonksiyonu
+  function toggleCategory(category, clickedButton) {
+    const contentDiv = document.getElementById('category-content');
+
+    // Tüm kategori butonlarından 'active-category' sınıfını kaldır
+    document.querySelectorAll('.category-button').forEach(btn => {
+      btn.classList.remove('active-category');
+    });
+
+    // Tıklanan butona 'active-category' sınıfını ekla
+    if (clickedButton) {
+      clickedButton.classList.add('active-category');
+      activeCategoryButton = clickedButton;
+    }
+
+    // İçeriğin yumuşak geçişi
+    if (contentDiv.classList.contains('active')) {
+      contentDiv.classList.remove('active');
+      setTimeout(() => {
+        updateContent(category, contentDiv);
+      }, 700); // Fade-out süresi ile eşleşmeli
+    } else {
+      updateContent(category, contentDiv);
+    }
+  }
+
+  // Ürün yer tutucu HTML'i oluşturan fonksiyon
+  const productPlaceholder = (title, description, tag, imageUrl, detailImages = []) => {
+    // Görsel URL'si sağlanmazsa, placeholder kullan
+    const finalImageUrl = imageUrl || `https://placehold.co/400x300/e0e0e0/333333?text=${encodeURIComponent(title)}`;
+    return `
+        <div class="bg-white rounded-lg shadow-lg p-5 product-card">
+            <img src="${finalImageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi';" alt="${title}" class="rounded-md mb-4 w-full h-52 object-cover transition-transform duration-300">
+            <h4 class="font-semibold text-xl text-gray-900 mb-2">${title}</h4>
+            <p class="text-sm text-gray-700 mb-3">${description}</p>
+            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full mb-3">${tag}</span>
+            <button onclick="showProductDetails('${title}', [
+                '${detailImages[0] || finalImageUrl}',
+                '${detailImages[1] || finalImageUrl}',
+                '${detailImages[2] || finalImageUrl}',
+                '${detailImages[3] || finalImageUrl}'
+            ])" class="w-full btn-primary block text-center mt-2 flex items-center justify-center">
+                <i class="fas fa-eye"></i>
+                <span>Detaylı İncele</span>
+            </button>
+        </div>
+    `;
+  };
+
+
+  // Kategori içeriğini güncelleyen fonksiyon
+  function updateContent(category, contentDivParam) { // contentDivParam olarak değiştirildi
+    const contentDiv = contentDivParam || document.getElementById('category-content'); // Eğer tanımlı değilse elementi al
+    let content = '';
+
+    if (category === 'koltuk') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Koltuk Takımları</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Modern Chester Koltuk Takımı', 
+            'Salonunuz için modern ve şık bir görünüm sunan bu koltuk takımı, konforlu oturumu ve dayanıklı yapısıyla öne çıkıyor. Özel kumaş seçenekleriyle kişiselleştirilebilir.', 
+            'Lüks Seri', 
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+            [
+                'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop',
+                'https://plus.unsplash.com/photos/new/unsplash/assets/hero.jpg?q=80&w=1780&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1593026042450-48222b9b77d6?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1596956277969-95a20d436c64?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Rahat Köşe Koltuk Takımı', 
+            'Geniş ve rahat oturma alanı sunan bu köşe koltuk takımı, misafirlerinizi ağırlamak ve keyifli anlar geçirmek için ideal. Farklı renk ve kumaş seçenekleriyle evinize uyum sağlar.', 
+            'Konforlu', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ko%C5%9Fe.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ko%C5%9Fe.png?raw=true',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1601614741630-f80e07119d67?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Uzun Köşe Koltuk Takımı', 
+            'Geniş ve rahat oturma alanı sunan bu uzun köşe koltuk takımı, misafirlerinizi ağırlamak ve keyifli anlar geçirmek için ideal. Farklı renk ve kumaş seçenekleriyle evinize uyum sağlar.', 
+            'Konforlu', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/uzun%20ko%C5%9Fe.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/uzun%20ko%C5%9Fe.png?raw=true',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1601614741630-f80e07119d67?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Şık ve Fonksiyonel Çekyat', 
+            'Hem oturma hem de yatma alanı olarak kullanılabilen bu çekyat, küçük daireler ve misafir odaları için pratik bir çözüm sunar. Kaliteli mekanizması sayesinde kolayca yatak haline getirilebilir.', 
+            'Pratik', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/58a63a7a-9edf-4a2d-8f8d-e57a2b889845.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/58a63a7a-9edf-4a2d-8f8d-e57a2b889845.png?raw=true',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    }
+    else if (category === 'gardolap') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Gardıroplar</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Panjurlu Antrasit Geniş Gardırop', 
+            'Antrasit rengi ve modern panjur detaylarıyla yatak odanıza sofistike bir dokunuş katın. Geniş iç hacmi sayesinde tüm kıyafetlerinizi düzenli bir şekilde saklayabilirsiniz. Dayanıklı malzemeden üretilmiştir.', 
+            'Modern', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/2a820ae8-6f90-4e4c-a3b4-99944d28eebb.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/2a820ae8-6f90-4e4c-a3b4-99944d28eebb.png?raw=true',
+                'https://images.unsplash.com/photo-1610464619736-2e86b03c800c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Panjurlu Krem Geniş Gardırop', 
+            'Krem rengi ve zarif panjur detaylarıyla yatak odanızda ferah bir atmosfer yaratın. İç düzenlemesiyle maksimum depolama alanı sunar. Uzun ömürlü kullanım için yüksek kaliteli malzemelerle üretilmiştir.', 
+            'Ferah', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/krem%20panjurlu.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/krem%20panjurlu.png?raw=true',
+                'https://images.unsplash.com/photo-1610464619736-2e86b03c800c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Panjurlu Çam Geniş Gardırop', 
+            'Doğal çam rengi ve modern panjurlu tasarımıyla yatak odanıza sıcak ve davetkar bir hava katın. Geniş iç hacmi ve akılcı bölmeleriyle eşyalarınızı düzenlemek artık çok kolay.', 
+            'Doğal', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/panjurlu%20%C3%A7am.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/panjurlu%20%C3%A7am.png?raw=true',
+                'https://images.unsplash.com/photo-1610464619736-2e86b03c800c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz 3 Kapılı Fonksiyonel Gardırop', 
+            'Minimalist beyaz tasarımıyla her türlü yatak odasına uyum sağlayan bu 3 kapılı gardırop, akılcı iç düzenlemesiyle eşyalarınızı düzenli tutmanıza yardımcı olur. Kaliteli menteşeleri uzun ömürlü kullanım sunar.', 
+            'Minimalist', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true',
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/e9d761fb-3f1a-40a0-bb8d-17e3bb6035b0.jpeg?raw=true',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi 3 Kapılı Gardırop', 
+            'Doğal çam rengi ve sade tasarımıyla yatak odanıza huzur katan bu 3 kapılı gardırop, geniş iç hacmi ve pratik bölmeleriyle kıyafetlerinizi ve aksesuarlarınızı kolayca organize etmenizi sağlar.', 
+            'Rustik', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%203%20kap%C4%B1l%C4%B1.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%203%20kap%C4%B1l%C4%B1.png?raw=true',
+                'https://images.unsplash.com/photo-1610464619736-2e86b03c800c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz 4 Kapılı Geniş Gardırop', 
+            'Büyük aileler ve geniş depolama ihtiyacı olanlar için ideal olan bu 4 kapılı beyaz gardırop, şık tasarımıyla odanıza zarafet katarken, düzenli bir yaşam alanı sunar. Ek raf ve çekmece seçenekleriyle kişiselleştirilebilir.', 
+            'Fonksiyonel', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/3aeb1dd5-cc46-415f-946d-95479f3d262e.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/3aeb1dd5-cc46-415f-946d-95479f3d262e.png?raw=true',
+                'https://images.unsplash.com/photo-1610464619736-2e86b03c800c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi 4 Kapılı Gardırop', 
+            'Doğal ahşap dokusuyla sıcak bir atmosfer yaratan bu 4 kapılı çam gardırop, geniş iç hacmi ve sağlam yapısıyla uzun yıllar kullanım imkanı sunar. Her türlü dekorasyon tarzına uyum sağlar.', 
+            'Geniş', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5c45a8a7-ca3c-413a-bb22-0d1e39bc3095.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5c45a8a7-ca3c-413a-bb22-0d1e39bc3095.png?raw=true',
+                'https://images.unsplash.com/photo-1610464619736-2e86b03c800c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    }
+    else if (category === 'portmanto') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Portmantolar</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Çam Rengi Çok Fonksiyonlu Portmanto', 
+            'Girişinize doğal ve sıcak bir dokunuş katan bu çam rengi portmanto, geniş askılık alanı, ayakkabılık bölümü ve çekmeceleriyle fonksiyonel bir çözüm sunar. Misafirlerinizi şıklıkla karşılayın.', 
+            'Doğal', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/04e5522e-4bc6-4431-b8cd-ba84b6a69b5e.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/04e5522e-4bc6-4431-b8cd-ba84b6a69b5e.png?raw=true',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz Modern Portmanto', 
+            'Modern ve minimalist tasarımıyla dikkat çeken bu beyaz portmanto, küçük girişler için idealdir. Askılık, raf ve çekmece kombinasyonlarıyla eşyalarınızı düzenli tutar.', 
+            'Şık', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20fortmanto.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20fortmanto.png?raw=true',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Aynalı Antrasit Portmanto', 
+            'Antrasit rengi ve tam boy aynasıyla hem estetik hem de fonksiyonel bir çözüm sunan bu portmanto, girişinize derinlik ve modernlik katar. Geniş depolama alanlarıyla pratik kullanım sağlar.', 
+            'Aynalı', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/portmanto%20granit.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/portmanto%20granit.png?raw=true',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Aynalı Krem Portmanto', 
+            'Krem rengi ve zarif aynasıyla girişinize aydınlık ve şıklık katan bu portmanto, hem kıyafetlerinizi asmak hem de anahtarlarınızı ve çantalarınızı koymak için ideal bir alan sunar.', 
+            'Zarif', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20aynal%C4%B1%20portmanto.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20aynal%C4%B1%20portmanto.png?raw=true',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    }
+    else if (category === 'konsol') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Konsollar</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Modern Beyaz Konsol', 
+            'Minimalist ve çağdaş tasarımıyla öne çıkan bu beyaz konsol, salonunuzda veya yemek odanızda şık bir depolama alanı sunar. Geniş çekmeceleri ve raflarıyla eşyalarınızı düzenli tutar.', 
+            'Modern', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol1.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol1.png?raw=true',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz Şık Konsol', 
+            'Temiz çizgileri ve parlak beyaz yüzeyiyle her dekorasyona uyum sağlayan bu konsol, hem estetik hem de işlevsel bir mobilya parçasıdır. Derin çekmeceleriyle ekstra depolama alanı sunar.', 
+            'Şık', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20beyaz.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20beyaz.png?raw=true',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Antrasit Zarif Konsol', 
+            'Modern yaşam alanları için tasarlanmış antrasit renkli bu konsol, metal ayak detayları ve fonksiyonel çekmeceleriyle dikkat çeker. Şık bir sunum alanı olarak da kullanılabilir.', 
+            'Zarif', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/antrasit%20konsol.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/antrasit%20konsol.png?raw=true',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Krem Rengi Klasik Konsol', 
+            'Krem rengi ve klasik çizgileriyle evinize asil bir dokunuş katan bu konsol, geniş üst yüzeyiyle dekoratif objelerinizi sergilemeniz için idealdir. Salonunuzda veya koridorunuzda göz alıcı bir parça.', 
+            'Asil', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20krem.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/konsol%20krem.png?raw=true',
+                'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    }
+    else if (category === 'sifonyer') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Şifonyerler</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Modern Beyaz Şifonyer', 
+            'Yatak odanızda düzeni ve zarafeti bir araya getiren bu modern beyaz şifonyer, geniş çekmeceleriyle kıyafetlerinizi ve aksesuarlarınızı kolayca organize etmenizi sağlar. Şık kulpları tasarıma bütünlük katar.', 
+            'Düzenleyici', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20%C5%9Fifonyer.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20%C5%9Fifonyer.png?raw=true',
+                'https://files09.oaiusercontent.com/file-6phCNTu6QtbQDb3zzRpgPT?se=2025-06-15T15%3A06%3A17Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D5d6746e8-221f-4cdb-b349-6dbce4375a1b.png&sig=0%2BrWqu/qcpNAgyOWXPzNI4wSF7tze0/e89L3D92OEvg%3D',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi Şifonyer', 
+            'Doğal çam ağacının sıcaklığını yatak odanıza taşıyan bu şifonyer, geniş ve derin çekmeceleriyle tüm kişisel eşyalarınız için bol depolama alanı sunar. Dayanıklı yapısıyla uzun yıllar kullanılabilir.', 
+            'Geniş', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5d6746e8-221f-4cdb-b349-6dbce4375a1b.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5d6746e8-221f-4cdb-b349-6dbce4375a1b.png?raw=true',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+        }
+     else if (category === 'akillisehpa') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Akıllı Sehpalar</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Modern Beyaz Akıllı Sehpa', 
+            'Fonksiyonellik ve estetiği birleştiren bu modern akıllı sehpa, uzaktan kumandalı yükseltme, depolama bölmeleri ve şarj üniteleri gibi özellikleriyle yaşam alanınızı daha kullanışlı hale getirir.', 
+            'Akıllı', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ak%C4%B1ll%C4%B1%20sehpa%20beyaz.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ak%C4%B1ll%C4%B1%20sehpa%20beyaz.png?raw=true',
+                'https://files09.oaiusercontent.com/file-6phCNTu6QtbQDb3zzRpgPT?se=2025-06-15T15%3A06%3A17Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D5d6746e8-221f-4cdb-b349-6dbce4375a1b.png&sig=0%2BrWqu/qcpNAgyOWXPzNI4wSF7tze0/e89L3D92OEvg%3D',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi Akıllı Sehpa', 
+            'Doğal çam rengiyle yaşam alanınıza sıcaklık katan bu akıllı sehpa, katlanabilir yapısı ve gizli bölmeleriyle hem estetik hem de pratik bir çözüm sunar. Çalışma masası veya yemek masası olarak da kullanılabilir.', 
+            'Çok Amaçlı', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5d6746e8-221f-4cdb-b349-6dbce4375a1b.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5d6746e8-221f-4cdb-b349-6dbce4375a1b.png?raw=true',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    }
+    else if (category === 'ayakkabilik') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Ayakkabılıklar</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Klasik Beyaz Ayakkabılık', 
+            'Girişinize şıklık katan bu klasik beyaz ayakkabılık, çok katlı yapısıyla tüm ayakkabılarınızı düzenli bir şekilde saklamanıza olanak tanır. Dayanıklı malzemesi uzun ömürlü kullanım sunar.', 
+            'Klasik', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/modern%20beyaz%20ayakkab%C4%B1l%C4%B1k.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/modern%20beyaz%20ayakkab%C4%B1l%C4%B1k.png?raw=true',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Modern Krem Ayakkabılık', 
+            'Modern tasarımı ve krem rengiyle girişinize ferah bir hava katan bu ayakkabılık, kompakt yapısıyla dar alanlarda bile rahatlıkla kullanılabilir. Şık ve fonksiyonel bir depolama çözümüdür.', 
+            'Kompakt', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20ayakkab%C4%B1l%C4%B1k%20modern.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20ayakkab%C4%B1l%C4%B1k%20modern.png?raw=true',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz Çok Katlı Ayakkabılık', 
+            'Beyaz rengi ve çok katlı tasarımıyla geniş ayakkabı koleksiyonlarına çözüm sunan bu ayakkabılık, ayakkabılarınızı tozdan korurken düzenli bir görünüm sağlar. Sağlam yapısıyla uzun süreli kullanım imkanı sunar.', 
+            'Geniş', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20ayakkab%C4%B1l%C4%B1k.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20ayakkab%C4%B1l%C4%B1k.png?raw=true',
+                'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi Ayakkabılık', 
+            'Doğal çam rengi ve sade tasarımıyla girişinize sıcaklık katan bu ayakkabılık, hem ayakkabılarınızı düzenlemenize yardımcı olur hem de doğal bir atmosfer yaratır. Sağlam ve dayanıklıdır.', 
+            'Doğal', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%20ayakkab%C4%B1l%C4%B1k,.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%20ayakkab%C4%B1l%C4%B1k,.png?raw=true',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi Uzun Ayakkabılık', 
+            'Dikey tasarımıyla az yer kaplayan bu uzun çam ayakkabılık, hem çok sayıda ayakkabıyı barındırır hem de şık bir görünüm sunar. Antre veya dar koridorlar için idealdir.', 
+            'Yer Tasarruflu', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%20uzun%20ayakkab%C4%B1l%C4%B1k.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%20uzun%20ayakkab%C4%B1l%C4%B1k.png?raw=true',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz Uzun Ayakkabılık', 
+            'Modern ve ince yapısıyla dikkat çeken bu beyaz uzun ayakkabılık, şık bir depolama çözümü sunarken, yaşam alanınıza ferah bir dokunuş katar. Kapaklı tasarımıyla ayakkabılarınızı gizler.', 
+            'İnce', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20ayakkab%C4%B1l%C4%B1k%20uzun.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20ayakkab%C4%B1l%C4%B1k%20uzun.png?raw=true',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Beyaz Çok Amaçlı Erzak Dolabı', 
+            'Mutfakta veya kilerde ekstra depolama alanı sunan bu beyaz erzak dolabı, ayarlanabilir rafları ve geniş iç hacmiyle gıda ürünlerinizi ve mutfak gereçlerinizi düzenli bir şekilde saklamanıza yardımcı olur.', 
+            'Mutfak Yardımcısı', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20saklama%20dolab%C4%B1.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20saklama%20dolab%C4%B1.png?raw=true',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Çam Rengi Çok Amaçlı Erzak Dolabı', 
+            'Doğal ahşap dokusuyla mutfağınıza sıcaklık katan bu çam rengi erzak dolabı, geniş iç hacmi ve pratik bölmeleriyle tüm erzaklarınızı ve mutfak eşyalarınızı düzenli tutmanızı sağlar. Sağlam ve kullanışlıdır.', 
+            'Ekolojik', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%20erzak%20dolab%C4%B1.png?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%20erzak%20dolab%C4%B1.png?raw=true',
+                'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    }
+    else if (category === 'beyazesya') {
+      content = `
+        <h3 class="text-3xl font-bold mb-6 text-blue-700 text-center">Beyaz Eşya</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          ${productPlaceholder(
+            'Yüksek Kapasiteli Çamaşır Makinesi', 
+            'Enerji verimliliği yüksek ve sessiz çalışabilen bu modern çamaşır makinesi, geniş kapasitesiyle büyük aileler için idealdir. Farklı yıkama programlarıyla her türlü kumaşa özel bakım sunar.', 
+            'Enerji Verimli', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ee923c95-444e-4bf8-b06c-e25ab8a80a7b.jpeg?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ee923c95-444e-4bf8-b06c-e25ab8a80a7b.jpeg?raw=true',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Akıllı Bulaşık Makinesi', 
+            'Akıllı sensörleri sayesinde bulaşıklarınızın kirlilik seviyesine göre su ve deterjan miktarını ayarlayan bu bulaşık makinesi, kusursuz temizlik ve maksimum enerji tasarrufu sunar. Şık tasarımı mutfağınıza değer katar.', 
+            'Akıllı', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5cd21cc5-a988-4a73-954c-6821a275a2ed.jpeg?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/5cd21cc5-a988-4a73-954c-6821a275a2ed.jpeg?raw=true',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Fırınlı Ankastre Ocak Seti', 
+            'Modern mutfaklar için tasarlanmış bu ankastre fırın ve ocak seti, yüksek pişirme performansıyla yemeklerinizi mükemmel hale getirir. Kolay temizlenebilir yüzeyleri ve şık görünümüyle mutfağınızın yıldızı olacak.', 
+            'Ankastre', 
+            'https://statics.vestel.com.tr/productimages/20265469_r1_1000_1000.jpg', 
+            [
+                'https://statics.vestel.com.tr/productimages/20265469_r1_1000_1000.jpg',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+          ${productPlaceholder(
+            'Geniş Hacimli Buzdolabı', 
+            'Yüksek enerji verimliliği ve geniş iç hacmiyle dikkat çeken bu buzdolabı, yiyeceklerinizi uzun süre taze tutar. Akıllı depolama çözümleri ve modern tasarımıyla mutfağınızın vazgeçilmezi olacak.', 
+            'Geniş', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true', 
+            [
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true',
+                'https://images.unsplash.com/photo-1544027733-4a11f2a3e0f4?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579737119749-d055a420b9e8?q=80&w=2070&auto=format&fit=crop'
+            ]
+          )}
+        </div>`;
+    } else { // Başlangıç içeriği
+        content = `
+            <h3 class="text-3xl font-bold mb-4 text-blue-700 text-center">Lütfen bir kategori seçin...</h3>
+            <p class="text-center text-gray-600">Yukarıdaki ürün kategorilerimizden birine tıklayarak çeşitli mobilya ve beyaz eşya çözümlerimizi keşfedin.</p>
+        `;
+    }
+
+    contentDiv.innerHTML = content;
+    contentDiv.classList.add('active');
+  }
+
+  // Slider Logic
+  let slideIndex = 0;
+  let slides = [];
+  let totalSlides = 0;
+  let sliderWrapper;
+  let sliderInterval;
+
+  const initializeSlider = () => {
+    slides = document.querySelectorAll('.slider-item');
+    totalSlides = slides.length;
+    sliderWrapper = document.querySelector('.slider-wrapper');
+
+    if (totalSlides > 0) {
+      showSlides();
+      if (sliderInterval) clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 5000);
+
+      document.querySelector('.slider-container').addEventListener('mouseenter', () => {
+        clearInterval(sliderInterval);
+      });
+      document.querySelector('.slider-container').addEventListener('mouseleave', () => {
+        sliderInterval = setInterval(nextSlide, 5000);
+      });
+
+      document.querySelector('.slider-nav .next').onclick = () => {
+        nextSlide();
+        clearInterval(sliderInterval); // Manuel tıklamada otomatik geçişi sıfırla
+        sliderInterval = setInterval(nextSlide, 5000);
+      };
+      document.querySelector('.slider-nav .prev').onclick = () => {
+        prevSlide();
+        clearInterval(sliderInterval); // Manuel tıklamada otomatik geçişi sıfırla
+        sliderInterval = setInterval(nextSlide, 5000);
+      };
+    }
+  };
+
+  function showSlides() {
+    if (sliderWrapper) {
+      sliderWrapper.style.transform = `translateX(${-slideIndex * 100}%)`;
+    }
+  }
+
+  function nextSlide() {
+    slideIndex = (slideIndex + 1) % totalSlides;
+    showSlides();
+  }
+
+  function prevSlide() {
+    slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+    showSlides();
+  }
+
+  // Sayfayı yukarı kaydırma butonu mantığı
+  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    // Sayfanın ne kadar aşağı kaydırıldığını kontrol et
+    if (window.scrollY > 300) { // 300px aşağı kaydırıldığında butonu göster
+      scrollToTopBtn.classList.add('show');
+    } else {
+      scrollToTopBtn.classList.remove('show');
+    }
+  });
+
+  scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Yumuşak kaydırma animasyonu
+    });
+  });
+
+  // "Ürünleri Keşfet" butonuna tıklama olayını ekle
+  document.getElementById('discoverProductsBtn').addEventListener('click', function() {
+    document.querySelector('#urunler').scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateContent('initial');
+    initializeSlider();
+  });
+
+  // Navbar linkleri için yumuşak kaydırma
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+          });
+      });
+  });
+</script>
+</body>
+</html>
