@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>İç Anadolu Spot | Modern Tasarım Mobilya ve Beyaz Eşya</title>
+  <meta name="keywords" content="iç anadolu spot, spot mobilya, beyaz eşya, ev eşyaları, ikinci el, sıfır, uygun fiyat, mobilya, spot, koltuk takımı, köşe koltuk, kanepe, berjer, yemek masası, sandalye, çalışma masası, ofis mobilyası, yatak odası takımı, yatak, baza, gardırop, şifonyer, komodin, konsol, vitrin, TV ünitesi, sehpa, zigon sehpa, portmanto, ayakkabılık, kitaplık, buzdolabı, çamaşır makinesi, bulaşık makinesi, fırın, ocak, davlumbaz, mikrodalga fırın, derin dondurucu, kurutma makinesi, klima, kombi, elektrik süpürgesi, robot süpürge, küçük ev aletleri, tost makinesi, çaycı, kahve makinesi, blender, ütü, halı, perde, avize, aydınlatma, tablo, ayna, vazo, biblo, yastık, battaniye, nevresim takımı, mutfak gereçleri, tencere, tava, çatal kaşık, tabak, bardak, banyo aksesuarları, ev dekorasyonu, modern mobilya, klasik mobilya, retro mobilya, vintage mobilya, antika mobilya, tasarım mobilya, mobilya modelleri, mobilya fiyatları, beyaz eşya fiyatları, enerji verimli, ankastre, çeyiz paketi, öğrenci evi eşyaları, ev kurma, eşya taşıma, mobilya montaj, spotçu, en yakın spotçu, spot mağazası, ucuz mobilya, indirimli mobilya, mobilya kampanyaları, beyaz eşya kampanyaları, ev eşyası kampanyaları, güvenilir spotçu, müşteri memnuniyeti, hızlı teslimat, ücretsiz kurulum, geniş ürün yelpazesi, evini yenile, evini diz, evini tamamla, dekorasyon fikirleri, ev eşyası alım satım, ikinci el eşya, spot eşya, evini donat, şık mobilya, ekonomik mobilya, konforlu mobilya, pratik mobilya, içanadolu spot, iç anadoluspot, içanadoluspot, akıllı sehpa">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -241,45 +242,6 @@
         width: 100%; /* Tam genişlikte alt çizgi */
     }
 
-
-    /* Product Slider Specific Styles */
-    .slider-container {
-      position: relative;
-      overflow: hidden;
-    }
-    .slider-wrapper {
-      display: flex;
-      transition: transform 0.8s ease-in-out; /* Smooth transition for slides */
-    }
-    .slider-item {
-      min-width: 100%; /* Each item takes full width */
-      box-sizing: border-box;
-      flex-shrink: 0; /* Prevent shrinking */
-    }
-    .slider-nav button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.6); /* Biraz daha koyu */
-      color: white;
-      border: none;
-      padding: 1rem;
-      cursor: pointer;
-      z-index: 10;
-      border-radius: 50%;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      font-size: 1.2rem; /* Daha büyük ikon */
-    }
-    .slider-nav button:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-      transform: translateY(-50%) scale(1.1); /* Hover'da biraz büyüme */
-    }
-    .slider-nav button.prev {
-      left: 1.5rem; /* Biraz daha içeride */
-    }
-    .slider-nav button.next {
-      right: 1.5rem; /* Biraz daha içeride */
-    }
 
     /* Newsletter Form */
     .newsletter-section {
@@ -946,7 +908,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 70%);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 70%);
         transition: opacity 0.5s ease-out;
         opacity: 0;
         pointer-events: none;
@@ -1308,6 +1270,192 @@
         transform: scale(1.1) rotate(90deg);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
+
+    /* Featured Products Grid */
+    .featured-products-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Default single column for mobile */
+        gap: 3rem; /* Increased spacing between cards */
+        justify-items: center; /* Center items in the grid */
+        perspective: 1000px; /* For 3D effects on the grid container */
+    }
+
+    @media (min-width: 768px) {
+        .featured-products-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .featured-products-grid {
+            grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+        }
+    }
+
+    /* Ultra Modern Featured Product Card */
+    .featured-product-card {
+        background: linear-gradient(160deg, #f8faff 0%, #e0f2fe 100%); /* Soft, cool gradient */
+        border-radius: 30px; /* More rounded, almost pebble-like */
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.08), /* Base shadow */
+            0 25px 70px rgba(0, 0, 0, 0.05), /* Deeper shadow */
+            0 0 0 0px rgba(59, 130, 246, 0.0); /* Initial glowing border effect */
+        padding: 2.5rem; /* More internal space */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.6s ease-out;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(220, 230, 250, 0.7); /* Subtle light border */
+        max-width: 420px; /* Slightly wider cards */
+        width: 100%;
+        transform-style: preserve-3d; /* Enable 3D transforms for children */
+        will-change: transform, box-shadow; /* Optimize for animation */
+    }
+
+    .featured-product-card::before { /* Top-left subtle glow/accent */
+        content: '';
+        position: absolute;
+        top: -20%;
+        left: -20%;
+        width: 60%;
+        height: 60%;
+        background: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.15), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease;
+        opacity: 0.7;
+    }
+
+    .featured-product-card::after { /* Bottom-right subtle glow/accent */
+        content: '';
+        position: absolute;
+        bottom: -20%;
+        right: -20%;
+        width: 60%;
+        height: 60%;
+        background: radial-gradient(circle at 90% 90%, rgba(167, 243, 208, 0.15), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease;
+        opacity: 0.7;
+    }
+
+    .featured-product-card:hover {
+        transform: translateY(-20px) scale(1.05) rotateX(2deg) rotateY(-2deg); /* More pronounced 3D lift and tilt */
+        box-shadow:
+            0 15px 45px rgba(0, 0, 0, 0.15), /* Deeper base shadow */
+            0 35px 90px rgba(0, 0, 0, 0.1), /* Even deeper shadow */
+            0 0 40px 5px rgba(59, 130, 246, 0.6); /* Stronger, more diffused blue glow */
+        background: linear-gradient(160deg, #e0f2fe 0%, #bfdbfe 100%); /* Slightly darker, more vibrant gradient on hover */
+        border-color: rgba(59, 130, 246, 0.8); /* More visible border on hover */
+    }
+
+    .featured-product-card:hover::before {
+        transform: scale(1.2) translate(10%, 10%); /* Expand and move glow */
+        opacity: 1;
+    }
+
+    .featured-product-card:hover::after {
+        transform: scale(1.2) translate(-10%, -10%); /* Expand and move glow */
+        opacity: 1;
+    }
+
+    .featured-product-card img {
+        width: 100%;
+        height: 300px; /* Taller images for more impact */
+        object-fit: cover;
+        border-radius: 25px; /* Match card border-radius more closely */
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18); /* Stronger image shadow */
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, filter 0.5s ease;
+        position: relative;
+        z-index: 1; /* Ensure image is above pseudo-elements */
+        filter: brightness(1) contrast(1); /* Initial filter state */
+    }
+
+    .featured-product-card:hover img {
+        transform: scale(1.08) rotateZ(0.5deg); /* Subtle rotation for realism */
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        filter: brightness(1.05) contrast(1.05); /* Slight enhancement on hover */
+    }
+
+    .featured-product-card h4 {
+        font-size: 2.4rem; /* Even larger heading */
+        font-weight: 900; /* Extra bold */
+        color: #1a202c; /* Darker text */
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        position: relative;
+        z-index: 1;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.1); /* More pronounced text shadow */
+        background: linear-gradient(90deg, #1e3a8a, #3b82f6); /* Gradient text */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all 0.4s ease;
+    }
+
+    .featured-product-card:hover h4 {
+        transform: translateY(-3px); /* Title also lifts slightly */
+        background: linear-gradient(90deg, #2563eb, #1e40af); /* Darker gradient on hover */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .featured-product-card p {
+        font-size: 1.2rem; /* Slightly larger paragraph */
+        color: #4a5568;
+        line-height: 1.8; /* Better readability */
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .featured-product-card .tag {
+        display: inline-block;
+        background: linear-gradient(45deg, #a7f3d0, #6ee7b7); /* Greenish gradient */
+        color: #065f46; /* Dark green text */
+        font-size: 1.05rem; /* Slightly larger tag */
+        font-weight: 800;
+        padding: 0.7rem 1.4rem; /* More padding */
+        border-radius: 9999px;
+        margin-bottom: 2rem;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(167, 243, 208, 0.5); /* Subtle border */
+    }
+
+    .featured-product-card .tag:hover {
+        background: linear-gradient(45deg, #6ee7b7, #34d399);
+        transform: translateY(-3px) scale(1.08); /* More pronounced lift and scale */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        border-color: rgba(110, 231, 183, 0.8);
+    }
+
+    .featured-product-card .btn-primary {
+        width: 95%; /* Even wider button */
+        max-width: 300px;
+        padding: 1.1rem 2.8rem; /* Even larger padding */
+        font-size: 1.2rem; /* Larger font */
+        font-weight: 700;
+        border-radius: 9999px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Stronger button shadow */
+        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Consistent gradient */
+    }
+
+    .featured-product-card .btn-primary:hover {
+        transform: translateY(-8px) scale(1.06); /* More pronounced lift */
+        box-shadow: 0 18px 45px rgba(0,0,0,0.45), 0 0 25px rgba(59, 130, 246, 0.7); /* Stronger, glowing button shadow */
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); /* Darker gradient on hover */
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -1501,72 +1649,60 @@
     </div>
   </section>
 
-  <section id="featured-products" class="py-20 bg-white">
+  <!-- Öne Çıkan Ürünler Bölümü - YENİ ULTRA MODERN TASARIM -->
+  <section id="featured-products" class="py-20 bg-gray-50">
     <h3 class="text-4xl sm:text-5xl font-bold mb-12 text-center text-blue-800">Öne Çıkan Ürünlerimiz</h3>
-    <div class="max-w-8xl mx-auto px-6">
-      <div class="slider-container relative w-full overflow-hidden">
-        <div class="slider-wrapper flex" style="transform: translateX(0px);">
-          <div class="slider-item p-4">
-            <div class="bg-white rounded-lg shadow-xl p-6 product-card flex flex-col md:flex-row items-center gap-6">
-              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Koltuk Takımı" class="rounded-md w-full md:w-1/2 h-64 md:h-80 object-cover">
-              <div class="md:w-1/2">
-                <h4 class="font-bold text-2xl sm:text-3xl text-gray-900 mb-3">Modern Koltuk Takımı</h4>
-                <p class="text-base sm:text-lg text-gray-700 mb-4">Küçük alanlar için ideal, şık ve fonksiyonel mini köşe takımı. Rahat oturumu ve modern çizgileriyle evinize ferahlık katın.</p>
-                <span class="inline-block bg-green-100 text-green-700 text-sm font-bold px-4 py-2 rounded-full mb-4">Yeni!</span>
-                <button onclick="showProductDetails('Modern Koltuk Takımı', [
-                  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop',
-                  'https://plus.unsplash.com/photos/new/unsplash/assets/hero.jpg?q=80&w=1780&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1593026042450-48222b9b77d6?q=80&w=2070&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1596956277969-95a20d436c64?q=80&w=2070&auto=format&fit=crop'
-                ])" class="btn-primary flex items-center justify-center">
-                    <i class="fas fa-eye"></i>
-                    <span>Detaylı İncele</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="slider-item p-4">
-            <div class="bg-white rounded-lg shadow-xl p-6 product-card flex flex-col md:flex-row-reverse items-center gap-6">
-              <img src="https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true" alt="Akıllı Buzdolabı" class="rounded-md w-full md:w-1/2 h-64 md:h-80 object-cover">
-              <div class="md:w-1/2">
-                <h4 class="font-bold text-2xl sm:text-3xl text-gray-900 mb-3">Yüksek Performanslı Akıllı Buzdolabı</h4>
-                <p class="text-base sm:text-lg text-gray-700 mb-4">Enerji verimliliği ve akıllı özellikleriyle mutfağınıza teknoloji ve şıklık katın. Geniş iç hacim ve özel saklama bölmeleri.</p>
-                <span class="inline-block bg-blue-100 text-blue-700 text-sm font-bold px-4 py-2 rounded-full mb-4">Yeni Ürün</span>
-                <button onclick="showProductDetails('Yüksek Performanslı Akıllı Buzdolabı', [
-                  'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true',
-                  'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop'
-                ])" class="btn-primary flex items-center justify-center">
-                    <i class="fas fa-eye"></i>
-                    <span>Detaylı İncele</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="slider-item p-4">
-            <div class="bg-white rounded-lg shadow-xl p-6 product-card flex flex-col md:flex-row items-center gap-6">
-              <img src="https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true" alt="Minimalist Gardırop" class="rounded-md w-full md:w-1/2 h-64 md:h-80 object-cover">
-              <div class="md:w-1/2">
-                <h4 class="font-bold text-2xl sm:text-3xl text-gray-900 mb-3">Minimalist Gardırop</h4>
-                <p class="text-base sm:text-lg text-gray-700 mb-4">Minimalist tasarımıyla yatak odanıza ferahlık katın. Akıllı depolama çözümleri.</p>
-                <span class="inline-block bg-purple-100 text-purple-700 text-sm font-bold px-4 py-2 rounded-full mb-4">Tavsiye Edilen</span>
-                <button onclick="showProductDetails('Minimalist Gardırop', [
-                  'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true',
-                  'https://images.unsplash.com/photo-1542898950-c8d76985223c?q=80&w=2070&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
-                ])" class="btn-primary flex items-center justify-center">
-                    <i class="fas fa-eye"></i>
-                    <span>Detaylı İncele</span>
-                </button>
-              </div>
-            </div>
-          </div>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="featured-products-grid">
+        <!-- Ürün Kartı 1 -->
+        <div class="featured-product-card">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Koltuk Takımı" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi';">
+          <h4>Modern Koltuk Takımı</h4>
+          <p>Küçük alanlar için ideal, şık ve fonksiyonel mini köşe takımı. Rahat oturumu ve modern çizgileriyle evinize ferahlık katın.</p>
+          <span class="tag">Yeni!</span>
+          <button onclick="showProductDetails('Modern Koltuk Takımı', [
+            'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop',
+            'https://plus.unsplash.com/photos/new/unsplash/assets/hero.jpg?q=80&w=1780&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1593026042450-48222b9b77d6?q=80&w=2070&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1596956277969-95a20d436c64?q=80&w=2070&auto=format&fit=crop'
+          ])" class="btn-primary flex items-center justify-center">
+              <i class="fas fa-eye"></i>
+              <span>Detaylı İncele</span>
+          </button>
         </div>
-        <div class="slider-nav">
-          <button class="prev"><i class="fas fa-chevron-left"></i></button>
-          <button class="next"><i class="fas fa-chevron-right"></i></button>
+
+        <!-- Ürün Kartı 2 -->
+        <div class="featured-product-card">
+          <img src="https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true" alt="Akıllı Buzdolabı" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi';">
+          <h4>Yüksek Performanslı Akıllı Buzdolabı</h4>
+          <p>Enerji verimliliği ve akıllı özellikleriyle mutfağınıza teknoloji ve şıklık katın. Geniş iç hacim ve özel saklama bölmeleri.</p>
+          <span class="tag">Yeni Ürün</span>
+          <button onclick="showProductDetails('Yüksek Performanslı Akıllı Buzdolabı', [
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/ceeb1b61-c6e5-472c-bde4-80543a19414a.jpeg?raw=true',
+            'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1627914838183-b32810f3c051?q=80&w=1974&auto=format&fit=crop'
+          ])" class="btn-primary flex items-center justify-center">
+              <i class="fas fa-eye"></i>
+              <span>Detaylı İncele</span>
+          </button>
+        </div>
+
+        <!-- Ürün Kartı 3 -->
+        <div class="featured-product-card">
+          <img src="https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true" alt="Minimalist Gardırop" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi';">
+          <h4>Minimalist Gardırop</h4>
+          <p>Minimalist tasarımıyla yatak odanıza ferahlık katın. Akıllı depolama çözümleri sunar ve her tarza uyum sağlar.</p>
+          <span class="tag">Tavsiye Edilen</span>
+          <button onclick="showProductDetails('Minimalist Gardırop', [
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%203%20kap%C4%B1l%C4%B1.png?raw=true',
+            'https://images.unsplash.com/photo-1542898950-c8d76985223c?q=80&w=2070&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1533090333-e18e38520336?q=80&w=2070&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1616046755498-842211603d3c?q=80&w=2070&auto=format&fit=crop'
+          ])" class="btn-primary flex items-center justify-center">
+              <i class="fas fa-eye"></i>
+              <span>Detaylı İncele</span>
+          </button>
         </div>
       </div>
     </div>
@@ -1596,7 +1732,7 @@
         <div class="author-info">
           <img src="https://placehold.co/80x80/ADD8E6/000000?text=CY" alt="Can Yılmaz Avatar">
           <span class="name">Can Yılmaz</span>
-          <span class="title">Tasarımcı, Ankara</span>
+          <span class="title">Öğretmen, İstanbul</span>
         </div>
         <div class="rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -1610,7 +1746,7 @@
         <div class="author-info">
           <img src="https://placehold.co/80x80/90EE90/000000?text=ZA" alt="Zeynep Aksoy Avatar">
           <span class="name">Zeynep Aksoy</span>
-          <span class="title">Şef, Bursa</span>
+          <span class="title">Serbest Meslek, İstanbul</span>
         </div>
         <div class="rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -1624,7 +1760,7 @@
         <div class="author-info">
           <img src="https://placehold.co/80x80/ADD8E6/000000?text=ED" alt="Emre Demir Avatar">
           <span class="name">Emre Demir</span>
-          <span class="title">İç Mimar, İzmir</span>
+          <span class="title">Yeni Doktor, İstanbul</span>
         </div>
         <div class="rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
@@ -1638,7 +1774,7 @@
         <div class="author-info">
           <img src="https://placehold.co/80x80/E0BBE4/000000?text=AK" alt="Aylin Kaya Avatar">
           <span class="name">Aylin Kaya</span>
-          <span class="title">Eğitimci, Antalya</span>
+          <span class="title">Eğitimci, İstanbul</span>
         </div>
         <div class="rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -1652,7 +1788,7 @@
         <div class="author-info">
           <img src="https://placehold.co/80x80/C7F0D3/000000?text=MÇ" alt="Murat Çelik Avatar">
           <span class="name">Murat Çelik</span>
-          <span class="title">Mühendis, Eskişehir</span>
+          <span class="title">Serbest Meslek, İstanbul</span>
         </div>
         <div class="rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -1753,8 +1889,6 @@
       modalProductImagesContainer.innerHTML = ''; // Mevcut görselleri temizle
 
       titleEl.textContent = title;
-      textEl.textContent = message;
-
       titleEl.style.color = isError ? '#dc2626' : '#2563eb';
 
       // Görselleri ekle (varsa)
@@ -1774,6 +1908,10 @@
           infoText.textContent = 'Detaylı Görselleri Büyütmek İçin Tıklayın!';
           modalProductImagesContainer.appendChild(infoText);
       }
+
+      // Metni görsellerden sonra ekle
+      textEl.textContent = message;
+
 
       buttons.forEach(buttonConfig => {
           const btnElement = document.createElement(buttonConfig.tag || 'button');
@@ -2023,7 +2161,7 @@
           )}
           ${productPlaceholder(
             'Çam Rengi 3 Kapılı Gardırop', 
-            'Doğal çam rengi ve sade tasarımıyla yatak odanıza huzur katan bu 3 kapılı gardırop, geniş iç hacmi ve pratik bölmeleriyle kıyafetlerinizi ve aksesuarlarınızı kolayca organize etmenizi sağlar.', 
+            'Doğal çam rengi ve sade tasarımıyla yatak odanıza huzur katan bu 3 kapılı gardırop, geniş iç hacmi ve pratik bölmeleriyle kıyafetlerinizi ve aksesuarlarınızı kolayca organize etmenizi sağlar. Sağlam ve dayanıklıdır.', 
             'Rustik', 
             'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/%C3%A7am%203%20kap%C4%B1l%C4%B1.png?raw=true', 
             [
@@ -2101,7 +2239,7 @@
           )}
           ${productPlaceholder(
             'Aynalı Krem Portmanto', 
-            'Krem rengi ve zarif aynasıyla girişinize aydınlık ve şıklık katan bu portmanto, hem kıyafetlerinizi asmak hem de anahtarlarınızı ve çantalarınızı koymak için ideal bir alan sunar.', 
+            'Krem rengi ve zarif aynasıyla girişinize aydınlık ve şıklık katan bu portmanto, hem kıyafetlerinizi asmak hem de anahtarlarınızı ve çantalarınızı koymak için ideal bir alan sunar. ', 
             'Zarif', 
             'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/beyaz%20aynal%C4%B1%20portmanto.png?raw=true', 
             [
@@ -2145,9 +2283,9 @@
             'Antrasit Zarif Konsol', 
             'Modern yaşam alanları için tasarlanmış antrasit renkli bu konsol, metal ayak detayları ve fonksiyonel çekmeceleriyle dikkat çeker. Şık bir sunum alanı olarak da kullanılabilir.', 
             'Zarif', 
-            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/antrasit%20konsol.png?raw=true', 
+            'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/c2ad505e-d26f-4b7e-9ac0-5bd7d6a95b39.png?raw=true', 
             [
-                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/antrasit%20konsol.png?raw=true',
+                'https://github.com/icanadoluspot/k-e-tak-m-/blob/main/c2ad505e-d26f-4b7e-9ac0-5bd7d6a95b39.png?raw=true',
                 'https://images.unsplash.com/photo-1594038166548-a003f9b2d69f?q=80&w=1974&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1579549303530-58079542a275?q=80&w=1974&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1582298687702-c9a7d3c0e1b6?q=80&w=1974&auto=format&fit=crop'
@@ -2393,59 +2531,6 @@
     contentDiv.classList.add('active');
   }
 
-  // Slider Logic
-  let slideIndex = 0;
-  let slides = [];
-  let totalSlides = 0;
-  let sliderWrapper;
-  let sliderInterval;
-
-  const initializeSlider = () => {
-    slides = document.querySelectorAll('.slider-item');
-    totalSlides = slides.length;
-    sliderWrapper = document.querySelector('.slider-wrapper');
-
-    if (totalSlides > 0) {
-      showSlides();
-      if (sliderInterval) clearInterval(sliderInterval);
-      sliderInterval = setInterval(nextSlide, 5000);
-
-      document.querySelector('.slider-container').addEventListener('mouseenter', () => {
-        clearInterval(sliderInterval);
-      });
-      document.querySelector('.slider-container').addEventListener('mouseleave', () => {
-        sliderInterval = setInterval(nextSlide, 5000);
-      });
-
-      document.querySelector('.slider-nav .next').onclick = () => {
-        nextSlide();
-        clearInterval(sliderInterval); // Manuel tıklamada otomatik geçişi sıfırla
-        sliderInterval = setInterval(nextSlide, 5000);
-      };
-      document.querySelector('.slider-nav .prev').onclick = () => {
-        prevSlide();
-        clearInterval(sliderInterval); // Manuel tıklamada otomatik geçişi sıfırla
-        sliderInterval = setInterval(nextSlide, 5000);
-      };
-    }
-  };
-
-  function showSlides() {
-    if (sliderWrapper) {
-      sliderWrapper.style.transform = `translateX(${-slideIndex * 100}%)`;
-    }
-  }
-
-  function nextSlide() {
-    slideIndex = (slideIndex + 1) % totalSlides;
-    showSlides();
-  }
-
-  function prevSlide() {
-    slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
-    showSlides();
-  }
-
   // Sayfayı yukarı kaydırma butonu mantığı
   const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
@@ -2474,8 +2559,7 @@
 
 
   document.addEventListener('DOMContentLoaded', () => {
-    updateContent('initial');
-    initializeSlider();
+    updateContent('initial'); // Kategori bölümü için başlangıç içeriğini yükle
   });
 
   // Navbar linkleri için yumuşak kaydırma
