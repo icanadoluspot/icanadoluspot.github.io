@@ -1655,6 +1655,279 @@
             font-size: 1.3rem;
         }
     }
+
+    /* Mobil Cihazlar İçin Genel Responsive Ayarlamalar (max-width: 767px) */
+    @media (max-width: 767px) {
+        /* Genel Bölüm Boşlukları */
+        section {
+            margin-bottom: 1.5rem;
+            padding: 2rem 1rem; /* Genel padding azaltıldı */
+        }
+
+        /* Logo ve Başlıklar */
+        .logo-effect {
+            font-size: 2.5rem; /* Logo boyutu küçültüldü */
+            margin-bottom: 1rem;
+        }
+        .hero-text-animate {
+            font-size: 2.5rem !important; /* Kahraman başlığı küçültüldü */
+            line-height: 1.3;
+        }
+        h3 { /* Genel h3 başlıkları */
+            font-size: 2rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+        h3::after { /* Başlık alt çizgisi */
+            width: 60px !important;
+        }
+        h4 { /* Kart başlıkları */
+            font-size: 1.5rem !important;
+        }
+        p { /* Genel paragraflar */
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Navbar */
+        nav {
+            flex-direction: column; /* Linkler dikey sıralandı */
+            align-items: center;
+            space-x: 0; /* Yatay boşluk kaldırıldı */
+            gap: 0.5rem; /* Dikey boşluk eklendi */
+        }
+        .nav-link {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            text-align: center;
+            width: fit-content; /* Genişliği içeriğe göre ayarla */
+        }
+        .nav-link::after {
+            bottom: -4px; /* Alt çizgi konumu ayarlandı */
+        }
+
+        /* "Rüya Evinize Bir Adım Daha Yaklaşın!" Bölümü */
+        .py-20 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        #discoverProductsBtn {
+            padding: 0.7rem 1.8rem; /* Buton boyutu küçültüldü */
+            font-size: 1rem;
+        }
+
+        /* Kategori Butonları */
+        .category-button {
+            padding: 0.8rem 0.5rem; /* Daha az padding */
+            font-size: 0.8rem;
+            min-width: unset; /* Minimum genişlik kaldırıldı */
+        }
+        .category-button span {
+            font-size: 0.8rem !important; /* Metin boyutu küçültüldü */
+        }
+        .grid.grid-cols-2.sm\:grid-cols-3.lg\:grid-cols-8 {
+            grid-template-columns: repeat(2, 1fr); /* Mobil için 2 sütun */
+            gap: 0.75rem; /* Boşluk azaltıldı */
+        }
+
+        /* Ürün Kartları (Kategori İçeriği) */
+        #category-content .grid {
+            grid-template-columns: repeat(1, 1fr); /* Mobil için tek sütun */
+            gap: 1.5rem; /* Boşluk azaltıldı */
+        }
+        .product-card img {
+            height: 200px; /* Ürün görseli yüksekliği ayarlandı */
+        }
+
+        /* Sosyal Medya İkonları */
+        .fixed.bottom-6.left-6 {
+            bottom: 1rem;
+            left: 1rem;
+            space-x: 0.8rem; /* Boşluk azaltıldı */
+        }
+        .social-icon {
+            width: 40px; /* Simgeler küçültüldü */
+            height: 40px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        .social-icon img {
+            width: 50%; /* İç ikon boyutu */
+            height: 50%;
+        }
+
+        /* WhatsApp ve Scroll to Top Butonları */
+        .live-chat-button {
+            bottom: 1rem;
+            right: 1rem;
+            padding: 0.8rem;
+            font-size: 1.4rem;
+            width: 50px;
+            height: 50px;
+        }
+        .scroll-to-top-button {
+            bottom: 4.5rem; /* WhatsApp butonunun üstüne alındı */
+            right: 1.2rem;
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Mesaj Kutusu (Ürün Detay Modal) */
+        .message-box-content {
+            padding: 1.5rem; /* Padding azaltıldı */
+            max-width: 95%; /* Genişlik artırıldı */
+        }
+        .message-box-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+        .message-box-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-product-images {
+            grid-template-columns: repeat(2, 1fr); /* Mobil için 2 sütun */
+            gap: 0.5rem;
+            max-width: 100%; /* Görsel konteyneri genişletildi */
+            padding-bottom: 1.5rem;
+        }
+        .modal-product-images img {
+            width: 100%; /* Görsel genişliği tam */
+            height: 80px; /* Yükseklik azaltıldı */
+            object-fit: cover; /* Görselin alana sığması için */
+        }
+        .modal-product-images .info-text {
+            font-size: 0.75rem; /* Bilgi metni küçültüldü */
+            bottom: 0.5rem;
+        }
+        .message-box-content .message-buttons a {
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            max-width: 100%;
+        }
+        .message-box-content .message-buttons .whatsapp-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+        .message-box-close-button {
+            width: 30px;
+            height: 30px;
+            font-size: 1rem;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Rakamlarla Biz Bölümü */
+        .numbers-card {
+            padding: 1.5rem;
+        }
+        .numbers-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .numbers-card .number {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .numbers-card .description {
+            font-size: 1.1rem;
+        }
+        .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4 {
+            grid-template-columns: repeat(2, 1fr); /* Mobil için 2 sütun */
+            gap: 1rem;
+        }
+
+        /* İletişim Bölümü */
+        .contact-card {
+            padding: 2rem 1rem;
+        }
+        .contact-info-item {
+            flex-direction: column; /* Dikey sıralama */
+            text-align: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .contact-info-item i {
+            font-size: 2rem;
+        }
+        .contact-info-item p, .contact-info-item a {
+            font-size: 0.95rem;
+        }
+        .contact-working-hours {
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        .contact-working-hours h5 {
+            font-size: 1.2rem;
+        }
+        .contact-working-hours li {
+            font-size: 0.95rem;
+            padding: 0.3rem 0;
+        }
+        .map-button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+        }
+        .map-button i {
+            font-size: 1.2rem;
+        }
+
+        /* Sahibinden.com Bölümü */
+        .sahibinden-section {
+            padding: 3rem 1.5rem;
+            margin: 2rem auto;
+        }
+        .sahibinden-section h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .sahibinden-section p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .sahibinden-logo {
+            width: 60px;
+            top: 15px;
+            left: 15px;
+        }
+        .sahibinden-button {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            gap: 0.8rem;
+        }
+        .sahibinden-button i {
+            font-size: 1.3rem;
+        }
+
+        /* Öne Çıkan Ürünler */
+        .featured-product-card {
+            padding: 1.5rem;
+            border-radius: 20px;
+        }
+        .featured-product-card img {
+            height: 200px;
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+        }
+        .featured-product-card h4 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .featured-product-card p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .featured-product-card .tag {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .featured-product-card .btn-primary {
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+        }
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
