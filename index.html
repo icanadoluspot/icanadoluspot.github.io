@@ -84,6 +84,7 @@
 
     .product-card img {
         transition: transform 0.4s ease-out;
+        object-fit: cover; /* Masaüstü için cover */
     }
     .product-card:hover img {
         transform: scale(1.05); /* Resim üzerinde hafif zoom */
@@ -1780,6 +1781,7 @@
         }
         .product-card img {
             height: 200px; /* Ürün görseli yüksekliği ayarlandı */
+            object-fit: contain; /* Mobil için görselin tamamını sığdır */
         }
         /* Etiketler mobil uyumlu */
         .product-tags {
