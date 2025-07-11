@@ -690,7 +690,7 @@
     }
 
     .modal-product-images img { /* detaylı incele kucuk 4 adet resim */
-        width: 120%;
+        width: 100%; /* Genişliği 100% yapıldı */
         height: 120px; /* Küçük görsel boyutları */
         object-fit: contain;
         border-radius: 8px; /* Yuvarlak köşeler */
@@ -1780,7 +1780,7 @@
             gap: 1.5rem; /* Boşluk azaltıldı */
         }
         .product-card img {
-            height: 200px; /* Ürün görseli yüksekliği ayarlandı */
+            height: 250px; /* Ürün görseli yüksekliği artırıldı */
             object-fit: contain; /* Mobil için görselin tamamını sığdır */
         }
         /* Etiketler mobil uyumlu */
@@ -1849,8 +1849,8 @@
         }
         .modal-product-images img {
             width: 100%; /* Görsel genişliği tam */
-            height: 80px; /* Yükseklik azaltıldı */
-            object-fit: cover; /* Görselin alana sığması için */
+            height: 100px; /* Yükseklik artırıldı */
+            object-fit: contain; /* Görselin alana sığması için */
         }
         .modal-product-images .info-text {
             font-size: 0.75rem; /* Bilgi metni küçültüldü */
@@ -2491,7 +2491,7 @@
     const finalImageUrl = imageUrl || `https://placehold.co/400x300/e0e0e0/333333?text=${encodeURIComponent(title)}`;
     return `
         <div class="bg-white rounded-lg shadow-lg p-5 product-card">
-            <img src="${finalImageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi';" alt="${title}" class="rounded-md mb-4 w-full h-65 object-cover transition-transform duration-300">
+            <img src="${finalImageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333333?text=Görsel+Yüklenemedi';" alt="${title}" class="rounded-md mb-4 w-full object-cover transition-transform duration-300">
             <h4 class="font-semibold text-xl text-gray-900 mb-2">${title}</h4>
             <p class="text-sm text-gray-700 mb-3">${description}</p>
             <div class="product-tags">
