@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>İç Anadolu Spot | Dudullu 2. El ve Sıfır Beyaz Eşya & Mobilya</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/favicon.png">
-  <meta name="msapplication-TileImage" content="/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="msapplication-TileImage" content="favicon.png">
   <meta name="author" content="İç Anadolu Spot">
   <meta name="description" content="İç Anadolu Spot - Uygun fiyatlı mobilya ve beyaz eşya satış sitesi. Anadolu Yakasına ve çevresine özel hızlı teslimat!">
   <meta name="keywords" content="iç anadolu spot, spot mobilya, dudullu spotçu, istanbul spotçu, beyaz eşya, ev eşyaları, ikinci el, sıfır, uygun fiyat, mobilya, spot, koltuk takımı, köşe koltuk, kanepe, berjer, yemek masası, sandalye, çalışma masası, ofis mobilyası, yatak odası takımı, yatak, baza, gardırop, şifonyer, komodin, konsol, vitrin, TV ünitesi, sehpa, zigon sehpa, portmanto, ayakkabılık, kitaplık, buzdolabı, çamaşır makinesi, bulaşık makinesi, fırın, ocak, davlumbaz, mikrodalga fırın, derin dondurucu, kurutma makinesi, klima, kombi, elektrik süpürgesi, robot süpürge, küçük ev aletleri, tost makinesi, çaycı, kahve makinesi, blender, ütü, halı, perde, avize, aydınlatma, tablo, ayna, vazo, biblo, yastık, battaniye, nevresim takımı, mutfak gereçleri, tencere, tava, çatal kaşık, tabak, bardak, banyo aksesuarları, ev dekorasyonu, modern mobilya, klasik mobilya, retro mobilya, vintage mobilya, antika mobilya, tasarım mobilya, mobilya modelleri, mobilya fiyatları, beyaz eşya fiyatları, enerji verimli, ankastre, çeyiz paketi, öğrenci evi eşyaları, ev kurma, eşya taşıma, mobilya montaj, spotçu, en yakın spotçu, spot mağazası, ucuz mobilya, indirimli mobilya, mobilya kampanyaları, beyaz eşya kampanyaları, ev eşyası kampanyaları, güvenilir spotçu, müşteri memnuniyeti, hızlı teslimat, ücretsiz kurulum, geniş ürün yelpazesi, evini yenile, evini diz, evini tamamla, dekorasyon fikirleri, ev eşyası alım satım, ikinci el eşya, spot eşya, evini donat, şık mobilya, ekonomik mobilya, konforlu mobilya, pratik mobilya, içanadolu spot, iç anadoluspot, içanadoluspot, akıllı sehpa">
@@ -1246,12 +1246,21 @@
         align-items: center;
     }
     .modal-gallery-content img { /* detaylı incele resim boyutu */
-        max-width: 40%;
+        max-width: 40%; /* Masaüstü için %40 */
         max-height: 40%;
         border-radius: 12px;
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
         object-fit: contain; /* Görüntünün oranını koruyarak sığdır */
     }
+
+    /* Mobil cihazlar için responsive ayar */
+    @media (max-width: 767px) { /* 767px ve altındaki ekranlar için */
+        .modal-gallery-content img {
+            max-width: 90%; /* Mobil cihazlarda %90 boyutunda büyüt */
+            max-height: 90%;
+        }
+    }
+
     .modal-close-button {
         position: absolute;
         top: -20px; /* Görselin biraz dışına */
