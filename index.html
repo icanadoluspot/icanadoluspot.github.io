@@ -75,6 +75,10 @@
       border-radius: 16px; /* Daha yuvarlak köşeler */
       overflow: hidden; /* Resimlerin taşmasını engelle */
       background-color: #ffffff; /* Beyaz arka plan */
+      /* Mobil için flexbox düzeni eklendi */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* İçeriği dikeyde yay */
     }
     .product-card:hover {
       transform: translateY(-8px) scale(1.02); /* Hafifçe yukarı kay ve büyü */
@@ -85,6 +89,8 @@
     .product-card img {
         transition: transform 0.4s ease-out;
         object-fit: cover; /* Masaüstü için cover */
+        width: 100%; /* Görsel genişliği her zaman tam olsun */
+        height: 250px; /* Masaüstü için sabit yükseklik */
     }
     .product-card:hover img {
         transform: scale(1.05); /* Resim üzerinde hafif zoom */
@@ -1779,10 +1785,19 @@
             grid-template-columns: repeat(1, 1fr); /* Mobil için tek sütun */
             gap: 1.5rem; /* Boşluk azaltıldı */
         }
+        .product-card {
+            height: auto; /* Kartın yüksekliği içeriğe göre otomatik olsun */
+        }
         .product-card img {
-            height: 300px; /* Ürün görseli yüksekliği artırıldı */
+            height: auto; /* Yüksekliği otomatik ayarlasın */
+            width: 100%; /* Genişliği tam olsun */
+            max-height: 250px; /* Aşırı büyük resimleri sınırlamak için */
             object-fit: contain; /* Mobil için görselin tamamını sığdır */
         }
+        .product-card p {
+            flex-grow: 1; /* Paragrafın esnemesine izin ver */
+        }
+
         /* Etiketler mobil uyumlu */
         .product-tags {
             flex-direction: column; /* Mobil için etiketleri alt alta yığ */
@@ -2061,7 +2076,7 @@
   <section id="hakkimizda" class="about-us-section">
     <h3>Biz Kimiz?</h3>
     <p>
-      <strong class="font-extrabold">25 yılı aşkın süredir</strong>, İç Anadolu Spot olarak evlerinize ve ofislerinize <strong class="font-extrabold">kaliteyi, estetiği ve fonksiyonelliği</strong> bir arada sunuyoruz. Geniş ürün yelpazemizle, her zevke ve bütçeye uygun modern ve şık mobilya ile beyaz eşya çözümleri sunarken, <strong class="font-extrabold">müşteri memnuniyetini en üst düzeyde tutmayı</strong> her zaman önceliğimiz olarak benimsiyoruz. Her bir ürünümüzde <strong class="font-extrabold">titiz işçiliği ve dayanıklılığı</strong> garanti ediyoruz.
+      <strong class="font-extrabold">25 yılı aşkın süredir</strong>, İç Anadolu Spot olarak evlerinize ve ofislerinize <strong class="font-extrabold">kaliteyi, estetiği ve fonksiyonelliği</strong> bir arada sunuyoruz. Geniş ürün yelpazemizle, her zevke ve bütçeye uygun modern ve şık mobilya ve beyaz eşya çözümleri sunarken, <strong class="font-extrabold">müşteri memnuniyetini en üst düzeyde tutmayı</strong> her zaman önceliğimiz olarak benimsiyoruz. Her bir ürünümüzde <strong class="font-extrabold">titiz işçiliği ve dayanıklılığı</strong> garanti ediyoruz.
     </p>
   </section>
 
