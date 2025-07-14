@@ -1991,6 +1991,186 @@
             font-size: 1rem;
         }
     }
+
+    /* Yeni Modal Stilleri (Gizlilik Politikası ve Kullanım Koşulları için) */
+    .info-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2500; /* Ürün detay modalından daha yüksek */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease-out;
+    }
+    .info-modal-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .info-modal-content {
+        background-color: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        max-width: 800px; /* Genişletildi */
+        max-height: 90vh; /* Yüksekliği sınırla */
+        overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu */
+        transform: scale(0.7);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease-out;
+        position: relative;
+        text-align: left; /* Metni sola hizala */
+    }
+    .info-modal-overlay.show .info-modal-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+    .info-modal-content h4 {
+        font-size: 2rem; /* Başlık boyutu */
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #2563eb;
+        text-align: center; /* Başlığı ortala */
+    }
+    .info-modal-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 1rem;
+    }
+    .info-modal-content ul {
+        list-style: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: #334155;
+    }
+    .info-modal-content ul li {
+        margin-bottom: 0.5rem;
+    }
+    .info-modal-content strong {
+        color: #1e40af; /* Kalın metin rengi */
+    }
+    .info-modal-close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+        color: #666;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2501;
+    }
+    .info-modal-close-button:hover {
+        background-color: #ef4444;
+        color: white;
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Çerez İzni Modalı Stilleri */
+    .cookie-consent-overlay {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        z-index: 4000; /* En üstte */
+        transform: translateY(100%);
+        transition: transform 0.5s ease-out;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+    .cookie-consent-overlay.show {
+        transform: translateY(0);
+    }
+    .cookie-consent-content {
+        max-width: 900px;
+        text-align: center;
+    }
+    .cookie-consent-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        color: #e0e7ff;
+    }
+    .cookie-consent-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .cookie-consent-buttons button {
+        padding: 0.8rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .cookie-consent-buttons .accept-btn {
+        background-color: #10b981; /* Yeşil */
+        color: white;
+    }
+    .cookie-consent-buttons .accept-btn:hover {
+        background-color: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    .cookie-consent-buttons .decline-btn {
+        background-color: #ef4444; /* Kırmızı */
+        color: white;
+    }
+    .cookie-consent-buttons .decline-btn:hover {
+        background-color: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    .cookie-consent-buttons .more-info-btn {
+        background-color: #3b82f6; /* Mavi */
+        color: white;
+    }
+    .cookie-consent-buttons .more-info-btn:hover {
+        background-color: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (min-width: 768px) {
+        .cookie-consent-overlay {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 1.5rem 2.5rem;
+        }
+        .cookie-consent-content {
+            text-align: left;
+            margin-right: 2rem;
+        }
+        .cookie-consent-buttons {
+            flex-wrap: nowrap;
+        }
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -2025,6 +2205,29 @@
       <button id="modal-close-button" class="modal-close-button">
         <i class="fas fa-times"></i>
       </button>
+    </div>
+  </div>
+
+  <!-- Gizlilik Politikası ve Kullanım Koşulları için Yeni Modal Yapısı -->
+  <div id="info-modal-overlay" class="info-modal-overlay">
+    <div id="info-modal-content" class="info-modal-content">
+      <button id="info-modal-close-button" class="info-modal-close-button">
+        <i class="fas fa-times"></i>
+      </button>
+      <h4 id="info-modal-title"></h4>
+      <div id="info-modal-text"></div>
+    </div>
+  </div>
+
+  <!-- Çerez İzni Modalı -->
+  <div id="cookie-consent-overlay" class="cookie-consent-overlay">
+    <div class="cookie-consent-content">
+      <p>Web sitemiz, deneyiminizi iyileştirmek için çerezleri kullanır. Sitemizi kullanarak çerez politikamızı kabul etmiş olursunuz.</p>
+    </div>
+    <div class="cookie-consent-buttons">
+      <button id="accept-cookies" class="accept-btn">Kabul Et</button>
+      <button id="decline-cookies" class="decline-btn">Reddet</button>
+      <button id="more-info-cookies" class="more-info-btn">Daha Fazla Bilgi</button>
     </div>
   </div>
 
@@ -2311,8 +2514,8 @@
     </div>
     <p class="text-sm">© 2025 İç Anadolu Spot. Tüm hakları saklıdır.</p>
     <div class="flex justify-center space-x-6 mt-4">
-        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Gizlilik Politikası</a>
-        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Kullanım Koşulları</a>
+        <a href="#" id="privacyPolicyLink" class="text-gray-400 hover:text-white transition-colors duration-300">Gizlilik Politikası</a>
+        <a href="#" id="termsOfUseLink" class="text-gray-400 hover:text-white transition-colors duration-300">Kullanım Koşulları</a>
     </div>
     <div class="fixed bottom-6 left-6 flex space-x-5 z-50"> <!-- z-index ekledim -->
       <a href="https://wa.me/905510448834" target="_blank" class="social-icon whatsapp">
@@ -3131,6 +3334,93 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     updateContent('initial'); // Kategori bölümü için başlangıç içeriğini yükle
+
+    // Gizlilik Politikası linkine tıklama olayı
+    document.getElementById('privacyPolicyLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        showInfoModal('Gizlilik Politikası', `
+            <p><strong>İç Anadolu Spot</strong> olarak, müşterilerimizin gizliliğini ve kişisel verilerinin korunmasını ciddiye alıyoruz. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde veya hizmetlerimizi kullandığınızda topladığımız bilgiler, bu bilgileri nasıl kullandığımız ve koruduğumuz hakkında sizi bilgilendirmektedir.</p>
+
+            <h4>1. Topladığımız Bilgiler</h4>
+            <p>Web sitemizi ziyaret ettiğinizde veya iletişim formlarımızı doldurduğunuzda aşağıdaki türde bilgiler toplayabiliriz:</p>
+            <ul>
+                <li><strong>Kişisel Tanımlayıcı Bilgiler:</strong> Adınız, e-posta adresiniz, telefon numaranız gibi doğrudan sizi tanımlayan bilgiler. Bu bilgiler genellikle iletişim kurmak veya hizmet taleplerinizi işlemek için gönüllü olarak sağlanır.</li>
+                <li><strong>Teknik ve Kullanım Bilgileri:</strong> IP adresiniz, tarayıcı türünüz, işletim sisteminiz, web sitemizde geçirdiğiniz süre, ziyaret ettiğiniz sayfalar gibi otomatik olarak toplanan bilgiler. Bu bilgiler, web sitemizin performansını ve kullanıcı deneyimini iyileştirmek amacıyla kullanılır.</li>
+            </ul>
+
+            <h4>2. Bilgileri Kullanma Amacımız</h4>
+            <p>Topladığımız bilgileri aşağıdaki amaçlar doğrultusunda kullanırız:</p>
+            <ul>
+                <li>Hizmet taleplerinizi ve sorularınızı yanıtlamak.</li>
+                <li>Siparişlerinizi işlemek ve teslimatları gerçekleştirmek.</li>
+                <li>Web sitemizi ve hizmetlerimizi geliştirmek.</li>
+                <li>Pazarlama ve tanıtım faaliyetleri yürütmek (onayınız dahilinde).</li>
+                <li>Yasal yükümlülüklerimizi yerine getirmek.</li>
+            </ul>
+
+            <h4>3. Bilgilerin Paylaşılması</h4>
+            <p>Kişisel verilerinizi, yasal zorunluluklar dışında veya açık rızanız olmadan üçüncü taraflarla paylaşmayız. Hizmet sağlayıcılarımız (örneğin, kargo şirketleri) ile yalnızca hizmetin gerektirdiği ölçüde bilgi paylaşımı yapılabilir ve bu tarafların gizlilik standartlarına uymasını bekleriz.</p>
+
+            <h4>4. Çerezler (Cookies)</h4>
+            <p>Web sitemiz, kullanıcı deneyimini iyileştirmek ve site trafiğini analiz etmek amacıyla çerezler kullanabilir. Çerezler, tarayıcınız aracılığıyla bilgisayarınıza kaydedilen küçük metin dosyalarıdır. Tarayıcı ayarlarınızı değiştirerek çerezleri reddedebilir veya silinebilirsiniz, ancak bu durumda web sitemizin bazı özelliklerinin düzgün çalışmayabileceğini unutmayın.</p>
+
+            <h4>5. Veri Güvenliği</h4>
+            <p>Topladığımız bilgilerin güvenliğini sağlamak için çeşitli teknik ve idari önlemler almaktayız. Yetkisiz erişim, kullanım veya ifşayı önlemek amacıyla verilerinizi korumak için elimizden gelen çabayı gösteriyoruz.</p>
+
+            <h4>6. Haklarınız</h4>
+            <p>Kişisel verilerinizle ilgili olarak aşağıdaki haklara sahipsiniz:</p>
+            <ul>
+                <li>Bilgilerinize erişim talep etme.</li>
+                <li>Yanlış veya eksik bilgilerin düzeltilmesini isteme.</li>
+                <li>Bilgilerinizin silinmesini talep etme (yasal sınırlar dahilinde).</li>
+                <li>Veri işlemeye itiraz etme.</li>
+            </ul>
+            <p>Bu haklarınızı kullanmak için lütfen <a href="#iletisim" class="text-blue-600 hover:underline">İletişim</a> bölümümüzdeki bilgiler aracılığıyla bizimle irtibata geçin.</p>
+
+            <h4>7. Gizlilik Politikası'ndaki Değişiklikler</h4>
+            <p>Bu Gizlilik Politikası zaman zaman güncellenebilir. Herhangi bir değişiklik durumunda, güncellenmiş politikayı web sitemizde yayınlayarak sizi bilgilendireceğiz. Değişiklikler yayınlandığı tarihte yürürlüğe girer.</p>
+
+            <p>Son Güncelleme Tarihi: 13 Temmuz 2025</p>
+        `);
+    });
+
+    // Kullanım Koşulları linkine tıklama olayı
+    document.getElementById('termsOfUseLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        showInfoModal('Kullanım Koşulları', `
+            <p><strong>İç Anadolu Spot</strong> web sitesine hoş geldiniz. Bu Kullanım Koşulları, web sitemizi ziyaret ederek veya hizmetlerimizi kullanarak kabul ettiğiniz yasal bir sözleşmedir. Lütfen sitemizi kullanmadan önce bu koşulları dikkatlice okuyunuz.</p>
+
+            <h4>1. Hizmetlerin Kullanımı</h4>
+            <ul>
+                <li>Web sitemizdeki tüm içerikler (metin, görseller, logolar vb.) İç Anadolu Spot'a aittir ve telif hakları ile korunmaktadır. İçeriklerin izinsiz kullanımı yasaktır.</li>
+                <li>Web sitemizi yasalara uygun ve iyi niyet çerçevesinde kullanmayı kabul edersiniz. Sitenin işleyişini bozacak, diğer kullanıcıların haklarını ihlal edecek veya yasa dışı faaliyetlerde bulunacak davranışlardan kaçınmalısınız.</li>
+                <li>Sitemizdeki ürün bilgileri ve fiyatlar bilgilendirme amaçlıdır. Güncel stok ve fiyat bilgileri için lütfen bizimle iletişime geçiniz.</li>
+            </ul>
+
+            <h4>2. Teslimat ve Kurulum</h4>
+            <ul>
+                <li>Anadolu Yakası ve çevresine ücretsiz teslimat ve kurulum hizmeti sunulmaktadır. Diğer bölgeler için ek ücretler veya farklı koşullar geçerli olabilir.</li>
+                <li>Teslimat süreleri ve koşulları, siparişinize ve bulunduğunuz bölgeye göre değişiklik gösterebilir.</li>
+            </ul>
+
+            <h4>3. İade ve Değişim Politikası</h4>
+            <p>Satın aldığınız ürünlerle ilgili iade ve değişim koşulları, ürünün türüne ve durumuna göre farklılık gösterebilir. Detaylı bilgi için lütfen bizimle iletişime geçiniz.</p>
+
+            <h4>4. Sorumluluk Reddi</h4>
+            <p>İç Anadolu Spot, web sitesinde yer alan bilgilerin doğruluğunu ve güncelliğini sağlamak için azami çabayı gösterir. Ancak, bilgilerin eksiksizliği, doğruluğu veya güncelliği konusunda herhangi bir garanti vermez. Sitedeki bilgilere dayanarak verdiğiniz kararlardan İç Anadolu Spot sorumlu değildir.</p>
+
+            <h4>5. Fikri Mülkiyet Hakları</h4>
+            <p>Web sitesindeki tüm içerik, tasarım, metin, grafikler, logolar ve yazılımlar İç Anadolu Spot'a aittir veya lisanslı olarak kullanılmaktadır ve ilgili fikri mülkiyet kanunları ile korunmaktadır. Bu içeriklerin izinsiz kopyalanması, çoğaltılması veya dağıtılması yasaktır.</p>
+
+            <h4>6. Değişiklikler</h4>
+            <p>İç Anadolu Spot, bu Kullanım Koşullarını dilediği zaman değiştirme hakkını saklı tutar. Değişiklikler, web sitesinde yayınlandığı tarihte yürürlüğe girer. Sitemizi kullanmaya devam etmeniz, güncellenmiş koşulları kabul ettiğiniz anlamına gelir.</p>
+
+            <h4>7. Yürürlükteki Hukuk</h4>
+            <p>Bu Kullanım Koşulları, Türkiye Cumhuriyeti yasalarına tabidir ve bu yasalara göre yorumlanacaktır. Bu koşullardan doğabilecek her türlü uyuşmazlıkta İstanbul Mahkemeleri ve İcra Daireleri yetkilidir.</p>
+
+            <p>Son Güncelleme Tarihi: 13 Temmuz 2025</p>
+        `);
+    });
   });
 
   // Navbar linkleri için yumuşak kaydırma
@@ -3142,6 +3432,174 @@
           });
       });
   });
+
+  // Yeni bilgi modalını gösteren fonksiyon
+  function showInfoModal(title, contentHtml) {
+      const overlay = document.getElementById('info-modal-overlay');
+      const titleEl = document.getElementById('info-modal-title');
+      const textEl = document.getElementById('info-modal-text');
+
+      titleEl.textContent = title;
+      textEl.innerHTML = contentHtml; // HTML içeriğini doğrudan ekle
+
+      overlay.classList.add('show');
+      // Dışarı tıklayınca da kapanmasını sağla
+      const overlayClickHandler = (e) => {
+          if (e.target === overlay) {
+              closeInfoModal();
+              overlay.removeEventListener('click', overlayClickHandler);
+          }
+      };
+      overlay.addEventListener('click', overlayClickHandler);
+  }
+
+  // Yeni bilgi modalını kapatan fonksiyon
+  function closeInfoModal() {
+      document.getElementById('info-modal-overlay').classList.remove('show');
+  }
+
+  // Bilgi modalı kapatma butonuna tıklama olayını ekle
+  document.getElementById('info-modal-close-button').addEventListener('click', closeInfoModal);
+
+  // Çerez İzni Modalı İşlevselliği
+  document.addEventListener('DOMContentLoaded', () => {
+    const cookieConsentOverlay = document.getElementById('cookie-consent-overlay');
+    const acceptCookiesBtn = document.getElementById('accept-cookies');
+    const declineCookiesBtn = document.getElementById('decline-cookies');
+    const moreInfoCookiesBtn = document.getElementById('more-info-cookies');
+
+    // Çerez durumunu kontrol et
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i=0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+    const cookieConsent = getCookie('cookieConsent');
+
+    if (!cookieConsent) {
+        // Çerez izni verilmediyse modalı göster
+        setTimeout(() => {
+            cookieConsentOverlay.classList.add('show');
+        }, 1000); // Sayfa yüklendikten 1 saniye sonra göster
+    }
+
+    acceptCookiesBtn.addEventListener('click', () => {
+        setCookie('cookieConsent', 'accepted', 365); // 1 yıl geçerli
+        cookieConsentOverlay.classList.remove('show');
+        // IP loglama sistemi arka uç (backend) gerektirdiğinden, ön yüzde herhangi bir IP loglama çağrısı yapılmamıştır.
+        // logUserVisit('accepted'); // Bu satır, bir backend entegrasyonu için örnek olarak bırakılmıştır.
+    });
+
+    declineCookiesBtn.addEventListener('click', () => {
+        setCookie('cookieConsent', 'declined', 365); // 1 yıl geçerli
+        cookieConsentOverlay.classList.remove('show');
+        // IP loglama sistemi arka uç (backend) gerektirdiğinden, ön yüzde herhangi bir IP loglama çağrısı yapılmamıştır.
+        // logUserVisit('declined'); // Bu satır, bir backend entegrasyonu için örnek olarak bırakılmıştır.
+    });
+
+    moreInfoCookiesBtn.addEventListener('click', () => {
+        // Gizlilik Politikası modalını aç
+        showInfoModal('Gizlilik Politikası', `
+            <p><strong>İç Anadolu Spot</strong> olarak, müşterilerimizin gizliliğini ve kişisel verilerinin korunmasını ciddiye alıyoruz. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde veya hizmetlerimizi kullandığınızda topladığımız bilgiler, bu bilgileri nasıl kullandığımız ve koruduğumuz hakkında sizi bilgilendirmektedir.</p>
+
+            <h4>1. Topladığımız Bilgiler</h4>
+            <p>Web sitemizi ziyaret ettiğinizde veya iletişim formlarımızı doldurduğunuzda aşağıdaki türde bilgiler toplayabiliriz:</p>
+            <ul>
+                <li><strong>Kişisel Tanımlayıcı Bilgiler:</strong> Adınız, e-posta adresiniz, telefon numaranız gibi doğrudan sizi tanımlayan bilgiler. Bu bilgiler genellikle iletişim kurmak veya hizmet taleplerinizi işlemek için gönüllü olarak sağlanır.</li>
+                <li><strong>Teknik ve Kullanım Bilgileri:</strong> IP adresiniz, tarayıcı türünüz, işletim sisteminiz, web sitemizde geçirdiğiniz süre, ziyaret ettiğiniz sayfalar gibi otomatik olarak toplanan bilgiler. Bu bilgiler, web sitemizin performansını ve kullanıcı deneyimini iyileştirmek amacıyla kullanılır.</li>
+            </ul>
+
+            <h4>2. Bilgileri Kullanma Amacımız</h4>
+            <p>Topladığımız bilgileri aşağıdaki amaçlar doğrultusunda kullanırız:</p>
+            <ul>
+                <li>Hizmet taleplerinizi ve sorularınızı yanıtlamak.</li>
+                <li>Siparişlerinizi işlemek ve teslimatları gerçekleştirmek.</li>
+                <li>Web sitemizi ve hizmetlerimizi geliştirmek.</li>
+                <li>Pazarlama ve tanıtım faaliyetleri yürütmek (onayınız dahilinde).</li>
+                <li>Yasal yükümlülüklerimizi yerine getirmek.</li>
+            </ul>
+
+            <h4>3. Bilgilerin Paylaşılması</h4>
+            <p>Kişisel verilerinizi, yasal zorunluluklar dışında veya açık rızanız olmadan üçüncü taraflarla paylaşmayız. Hizmet sağlayıcılarımız (örneğin, kargo şirketleri) ile yalnızca hizmetin gerektirdiği ölçüde bilgi paylaşımı yapılabilir ve bu tarafların gizlilik standartlarına uymasını bekleriz.</p>
+
+            <h4>4. Çerezler (Cookies)</h4>
+            <p>Web sitemiz, kullanıcı deneyimini iyileştirmek ve site trafiğini analiz etmek amacıyla çerezler kullanabilir. Çerezler, tarayıcınız aracılığıyla bilgisayarınıza kaydedilen küçük metin dosyalarıdır. Tarayıcı ayarlarınızı değiştirerek çerezleri reddedebilir veya silinebilirsiniz, ancak bu durumda web sitemizin bazı özelliklerinin düzgün çalışmayabileceğini unutmayın.</p>
+
+            <h4>5. Veri Güvenliği</h4>
+            <p>Topladığımız bilgilerin güvenliğini sağlamak için çeşitli teknik ve idari önlemler almaktayız. Yetkisiz erişim, kullanım veya ifşayı önlemek amacıyla verilerinizi korumak için elimizden gelen çabayı gösteriyoruz.</p>
+
+            <h4>6. Haklarınız</h4>
+            <p>Kişisel verilerinizle ilgili olarak aşağıdaki haklara sahipsiniz:</p>
+            <ul>
+                <li>Bilgilerinize erişim talep etme.</li>
+                <li>Yanlış veya eksik bilgilerin düzeltilmesini isteme.</li>
+                <li>Bilgilerinizin silinmesini talep etme (yasal sınırlar dahilinde).</li>
+                <li>Veri işlemeye itiraz etme.</li>
+            </ul>
+            <p>Bu haklarınızı kullanmak için lütfen <a href="#iletisim" class="text-blue-600 hover:underline">İletişim</a> bölümümüzdeki bilgiler aracılığıyla bizimle irtibata geçin.</p>
+
+            <h4>7. Gizlilik Politikası'ndaki Değişiklikler</h4>
+            <p>Bu Gizlilik Politikası zaman zaman güncellenebilir. Herhangi bir değişiklik durumunda, güncellenmiş politikayı web sitemizde yayınlayarak sizi bilgilendireceğiz. Değişiklikler yayınlandığı tarihte yürürlüğe girer.</p>
+
+            <p>Son Güncelleme Tarihi: 13 Temmuz 2025</p>
+        `);
+    });
+  });
+
+  // Navbar linkleri için yumuşak kaydırma
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+          });
+      });
+  });
+
+  // Yeni bilgi modalını gösteren fonksiyon
+  function showInfoModal(title, contentHtml) {
+      const overlay = document.getElementById('info-modal-overlay');
+      const titleEl = document.getElementById('info-modal-title');
+      const textEl = document.getElementById('info-modal-text');
+
+      titleEl.textContent = title;
+      textEl.innerHTML = contentHtml; // HTML içeriğini doğrudan ekle
+
+      overlay.classList.add('show');
+      // Dışarı tıklayınca da kapanmasını sağla
+      const overlayClickHandler = (e) => {
+          if (e.target === overlay) {
+              closeInfoModal();
+              overlay.removeEventListener('click', overlayClickHandler);
+          }
+      };
+      overlay.addEventListener('click', overlayClickHandler);
+  }
+
+  // Yeni bilgi modalını kapatan fonksiyon
+  function closeInfoModal() {
+      document.getElementById('info-modal-overlay').classList.remove('show');
+  }
+
+  // Bilgi modalı kapatma butonuna tıklama olayını ekle
+  document.getElementById('info-modal-close-button').addEventListener('click', closeInfoModal);
+
 </script>
 </body>
 </html>
